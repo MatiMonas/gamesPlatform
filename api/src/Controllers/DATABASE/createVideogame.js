@@ -1,4 +1,4 @@
-const { Videogame } = require('../db');
+const { Videogame } = require('../../db');
 const { v4: uuidv4 } = require('uuid');
 
 const createVideogame = async (req, res, next) => {
