@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-module.export = (sequelize) => {
+module.exports = (sequelize) => {
   sequelize.define('gameGenre', {
     id: {
       type: DataTypes.UUID,
