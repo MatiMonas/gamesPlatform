@@ -1,12 +1,9 @@
 const { Router } = require('express');
+const createVideogame = require('../Controllers/createVideogame');
+const getVideogameByID = require('../Controllers/getVideogameByID');
 const router = Router();
 
-router.get('/', (req, res, next) => {
-  try {
-    throw new Error('f');
-  } catch (err) {
-    next(err);
-  }
-});
+router.post('/', createVideogame);
+router.get('/:id', getVideogameByID);
 
 module.exports = router;
