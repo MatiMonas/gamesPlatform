@@ -15,7 +15,7 @@ const createVideogame = async (req, res, next) => {
   try {
     const addGame = await Videogame.create({
       name,
-      description,
+      description, //en la base de datos cuando creo un juego le agrego la descripcion
       background_image,
       background_image_additional,
       releaseDate,
