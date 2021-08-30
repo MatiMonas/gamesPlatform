@@ -1,9 +1,11 @@
-const { Router } = require('express');
+const { Router } = require("express");
 
-const getDBVideogames = require('../Controllers/getAllVideogames');
+const getAllVideogames = require("../Controllers/getAllVideogames");
+// const getVideogamesByName = require("../Controllers/getVideogamesByName");
 
 const router = Router();
 
-router.get('/', getDBVideogames);
+// router.get("/", getVideogamesByName);
+router.get("/", getAllVideogames);
 
 module.exports = router;
