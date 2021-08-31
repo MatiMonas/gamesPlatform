@@ -8,6 +8,7 @@ const axios = require("axios");
 const getAllVideogames = async (req, res, next) => {
     const { name } = req.query;
 
+    /*---------------------SEARCH BY QUERY--------------------------*/
     if (name) {
         let dataBaseGames = [];
         try {
@@ -22,8 +23,6 @@ const getAllVideogames = async (req, res, next) => {
             next(err);
         }
         try {
-            // const getGames = await axios.get(`https://api.rawg.io/api/games?search=gta&key=`)
-
             const getGames = await axios.get(
                 `${SEARCH_URL}${name}&key=${API_KEY}`
             );
@@ -36,12 +35,15 @@ const getAllVideogames = async (req, res, next) => {
                 };
                 return game;
             });
+
+            /*-------------CONCAT VIDEOGAMES, DB FIRST-----------------------*/
             const allGAMES = [...dataBaseGames, ...APIGames];
-            res.json(allGAMES);
+            res.json(allGAMES.slice(0, 15));
         } catch (err) {
             next(err);
         }
     } else {
+        /*--------------------------GET ALL VIDEOGAMES-----------------------------*/
         try {
             const getDBVideogames = await Videogame.findAll(
                 {
@@ -57,6 +59,3 @@ const getAllVideogames = async (req, res, next) => {
 };
 
 module.exports = getAllVideogames;
-
-//api --> link imagen
-//bd --> link
