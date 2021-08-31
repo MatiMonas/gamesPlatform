@@ -16,7 +16,7 @@ const getGameByID = async (req, res, next) => {
                 { include: GameGenre },
                 { include: Platform }
             );
-            res.send(dataBaseGame);
+            res.json(dataBaseGame);
         } catch (err) {
             res.send("No se encuentra un videojuego con ese ID").next(err);
         }

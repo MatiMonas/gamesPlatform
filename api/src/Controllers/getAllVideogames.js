@@ -50,8 +50,8 @@ const getAllVideogames = async (req, res, next) => {
             const APIGames = await getAPIVideogames();
             const DBGames = await getDBVideogames();
             Promise.all([APIGames, DBGames]).then((response) => {
-                let [DATABASE, API] = response;
-                return res.json([...API, ...DATABASE]).status(200);
+                let [API, DATABASE] = response;
+                return res.json([...DATABASE, ...API]).status(200);
             });
         } catch (err) {
             next(err);

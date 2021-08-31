@@ -8,6 +8,7 @@ const getDBVideogames = async (req, res, next) => {
             },
             { include: Platform }
         );
+
         return getDBVideogames;
     } catch (err) {
         next(err);
