@@ -3,6 +3,8 @@ const { Videogame, GameGenre, Platform } = require("../db");
 const { API_KEY } = process.env;
 const { SEARCH_URL } = require("../utils/constants");
 const { Op } = require("sequelize");
+const getDBVideogames = require("./DATABASE/getDBVideogames");
+const getAPIVideogames = require("./API/getAPIVideogames");
 const axios = require("axios");
 
 const getAllVideogames = async (req, res, next) => {
@@ -26,7 +28,7 @@ const getAllVideogames = async (req, res, next) => {
             const getGames = await axios.get(
                 `${SEARCH_URL}${name}&key=${API_KEY}`
             );
-            console.log(getGames.data);
+
             const APIGames = await getGames.data.results?.map((element) => {
                 let game = {
                     id: element.id,
@@ -38,20 +40,19 @@ const getAllVideogames = async (req, res, next) => {
 
             /*-------------CONCAT VIDEOGAMES, DB FIRST-----------------------*/
             const allGAMES = [...dataBaseGames, ...APIGames];
-            res.json(allGAMES.slice(0, 15));
+            res.json(allGAMES.splice(0, 15));
         } catch (err) {
             next(err);
         }
     } else {
         /*--------------------------GET ALL VIDEOGAMES-----------------------------*/
         try {
-            const getDBVideogames = await Videogame.findAll(
-                {
-                    include: GameGenre,
-                },
-                { include: Platform }
-            );
-            res.json(getDBVideogames);
+            const APIGames = await getAPIVideogames();
+            const DBGames = await getDBVideogames();
+            Promise.all([APIGames, DBGames]).then((response) => {
+                let [DATABASE, API] = response;
+                return res.json([...API, ...DATABASE]).status(200);
+            });
         } catch (err) {
             next(err);
         }
