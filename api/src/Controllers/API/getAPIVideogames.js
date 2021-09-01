@@ -48,33 +48,29 @@ const getAPIVideogames = async (req, res, next) => {
         // //   Nombre
         // //   Géneros------*/
         // //podria intentar pushear al arrayOfPromises el promise.resolve de cada pagina
-        let page1 = (await axios.get(URL)).data;
+        let page1 = (await axios.get(`${URL}&page_size=40`)).data;
         let page2 = (await axios.get(page1.next)).data;
         let page3 = (await axios.get(page2.next)).data;
-        let page4 = (await axios.get(page3.next)).data;
-        let page5 = (await axios.get(page4.next)).data;
 
-        let result = Promise.all([page1, page2, page3, page4, page5])
+        let result = Promise.all([page1, page2, page3])
             .then((resolve) => {
-                let [p1, p2, p3, p4, p5] = resolve;
-                APIGames = [
-                    ...p1.results,
-                    ...p2.results,
-                    ...p3.results,
-                    ...p4.results,
-                    ...p5.results,
-                ].map((el) => {
-                    let gameData = {
-                        id: el.id,
-                        name: el.name,
-                        background_image: el.background_image,
-                        genres: el.genres.map((genre) => genre.name).join(", "),
-                        platforms: el.platforms
-                            .map((plat) => plat.platform.name)
-                            .join(", "),
-                    };
-                    return gameData;
-                });
+                let [p1, p2, p3] = resolve;
+                APIGames = [...p1.results, ...p2.results, ...p3.results].map(
+                    (el) => {
+                        let gameData = {
+                            id: el.id,
+                            name: el.name,
+                            background_image: el.background_image,
+                            genres: el.genres
+                                .map((genre) => genre.name)
+                                .join(", "),
+                            platforms: el.platforms
+                                .map((plat) => plat.platform.name)
+                                .join(", "),
+                        };
+                        return gameData;
+                    }
+                );
                 // console.log(APIGames);
                 return APIGames;
             })
