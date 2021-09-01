@@ -9,13 +9,14 @@ import {
 
 const initialState = {
     videogames: [],
+    newGame: null,
     genres: [],
     platforms: [],
     searchByName: [],
     searchById: [],
 };
 
-export default function reducer(state = initialState, { type, payload }) {
+export default function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
         case GET_GAMES:
             return {
@@ -23,6 +24,33 @@ export default function reducer(state = initialState, { type, payload }) {
                 videogames: payload,
             };
 
+        case GET_GENRES:
+            return {
+                ...state,
+                genres: payload,
+            };
+
+        case GET_PLATFORMS:
+            return {
+                ...state,
+                platforms: payload,
+            };
+
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                searchByName: payload,
+            };
+        case SEARCH_BY_ID:
+            return {
+                ...state,
+                searchById: payload,
+            };
+        case POST_VIDEOGAME:
+            return {
+                ...state,
+                newGame: payload,
+            };
         default:
             return state;
     }

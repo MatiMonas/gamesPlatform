@@ -1,12 +1,12 @@
-// import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import style from "./Landing.module.css";
 
 function LandingPage() {
     return (
         <>
-            <div className={style.container}>
-                <div>SOY LANDING PAGE</div>
+            <div>
+                <div className={style.container}>SOY LANDING PAGE</div>
                 <button>
                     <Link to="/home">Click</Link>
                 </button>

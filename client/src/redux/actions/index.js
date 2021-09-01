@@ -1,12 +1,12 @@
 import axios from "axios";
 import {
     GAMES_URL,
-    GAME_URL,
     GAME_URL_NAME,
     GAME_ID_URL,
     PLATFORMS_URL,
     GENRES_URL,
-} from "../../constants";
+    GAME_URL,
+} from "../../constants.js";
 import {
     GET_GAMES,
     SEARCH_BY_NAME,
