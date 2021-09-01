@@ -22,7 +22,7 @@ const createVideogame = async (req, res, next) => {
             releaseDate,
             background_image,
             rating,
-            platforms: platforms.map((el) => el),
+            platforms,
         })
             .then((response) => response.addGameGenres(genres))
             .then((response) => {
