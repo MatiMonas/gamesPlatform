@@ -1,11 +1,7 @@
-const constants = {
-    BASE_URL: "http://localhost:3001/api/",
-    GAME_URL: `${this.BASE_URL}videogame`,
-    GAME_URL_NAME: `${this.BASE_URL}videogame?name=`,
-    GAME_ID_URL: `${this.BASE_URL}videogame/:id`,
-    GAMES_URL: `${this.BASE_URL}videogames/`,
-    GENRES_URL: `${this.BASE_URL}gamegenre/`,
-    PLATFORMS_URL: `${this.BASE_URL}platforms`,
-};
-
-export default constants;
+export const BASE_URL = "http://localhost:3001/api/";
+export const GAME_URL = `${BASE_URL}videogame`;
+export const GAME_URL_NAME = `${BASE_URL}videogame?name=`;
+export const GAME_ID_URL = `${BASE_URL}videogame/:id`;
+export const GAMES_URL = `${BASE_URL}videogames/`;
+export const GENRES_URL = `${BASE_URL}gamegenre/`;
+export const PLATFORMS_URL = `${BASE_URL}platforms`;
