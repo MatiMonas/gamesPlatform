@@ -31,7 +31,7 @@ const getAPIVideogames = async (req, res, next) => {
         // let pages = [1, 2, 3, 4, 5].map((n) => {
         //     let newPage = Promise.resolve(
         //         axios.get(
-        //             ` https://api.rawg.io/api/games?key=178ece2035ae486d97b97d8234643709&page=${n}`
+        //             ` https://api.rawg.io/api/games?key=178ece2035ae486d97b97d8234643709&page=4`
         //         )
         //     );
         //     arrayOfPromises.push(newPage);
@@ -68,7 +68,10 @@ const getAPIVideogames = async (req, res, next) => {
                         id: el.id,
                         name: el.name,
                         background_image: el.background_image,
-                        genres: el.genres.map((genre) => genre.name),
+                        genres: el.genres.map((genre) => genre.name).join(", "),
+                        platforms: el.platforms
+                            .map((plat) => plat.platform.name)
+                            .join(", "),
                     };
                     return gameData;
                 });
@@ -80,8 +83,7 @@ const getAPIVideogames = async (req, res, next) => {
             })
             .catch((err) => console.err(err));
 
-        console.log(result);
-        return result;
+        return result; //[devuelve 100 juegos]
     } catch (err) {
         console.error(err);
     }

@@ -1,4 +1,4 @@
-const { Videogame } = require("../../db");
+const { Videogame, Platform, GameGenre } = require("../../db");
 const { v4: uuidv4 } = require("uuid");
 
 const createVideogame = async (req, res, next) => {
@@ -6,25 +6,43 @@ const createVideogame = async (req, res, next) => {
         name,
         description,
         background_image,
-        background_image_additional,
         releaseDate,
         rating,
-        platforms,
+        genres, //["miedo", "actions" ]
+        platforms, //["ps5"]
     } = req.body;
 
     try {
-        const addGame = await Videogame.create({
+        // const newDate = new Date(releaseDate)
+        await GameGenre.findAll({ where: { name: genres } });
+        await Videogame.create({
+            id: uuidv4(),
             name,
             description, //en la base de datos cuando creo un juego le agrego la descripcion
-            background_image,
-            background_image_additional,
             releaseDate,
+            background_image,
             rating,
-            platforms,
-            id: uuidv4(),
-        });
+            platforms: platforms.map((el) => el),
+        })
+            .then((response) => response.addGameGenres(genres))
+            .then((response) => {
+                return res.send(response);
+            });
 
-        res.status(200).send(addGame);
+        // genres.forEach(async (element) => {
+        //     let genre = await GameGenre.findOne({
+        //         where: { name: element },
+        //     });
+        // });
+
+        // platforms.forEach(async (element) => {
+        //     let platform = await Platform.findOne({
+        //         where: { name: element },
+        //     });
+        //     await newGame.addPlatform(platform);
+        // });
+
+        // res.status(200).send("ok");
     } catch (err) {
         next(err);
     }
