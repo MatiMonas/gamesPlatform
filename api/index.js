@@ -25,22 +25,24 @@ const axios = require("axios");
 const { GameGenre } = require("./src/db");
 
 // Syncing all the models at once.
-conn.sync({ force: true })
+conn.sync()
     .then(async () => {
-        const URL = GENRES_URL;
+        let temp = await GameGenre.findAll();
+        if (temp.length === 0) {
+            const URL = GENRES_URL;
+            try {
+                const getGenres = await axios.get(URL);
+                const resultGenres = getGenres.data?.results;
 
-        try {
-            const getGenres = await axios.get(URL);
-            const resultGenres = getGenres.data?.results;
-
-            resultGenres &&
-                resultGenres.map(async (genre) => {
-                    await GameGenre.findOrCreate({
-                        where: { name: genre.name },
+                resultGenres &&
+                    resultGenres.map(async (genre) => {
+                        await GameGenre.findOrCreate({
+                            where: { name: genre.name },
+                        });
                     });
-                });
-        } catch (err) {
-            console.error(err);
+            } catch (err) {
+                console.error(err);
+            }
         }
         server.listen(PORT, () => {
             console.log(`Listening at ${PORT}`); // eslint-disable-line no-console
