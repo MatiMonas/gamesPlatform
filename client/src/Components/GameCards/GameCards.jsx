@@ -1,15 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import style from "./GameCards.module.css";
 import GameCard from "../GameCard/GameCard.jsx";
 
-function GameCards() {
-    const videogames = useSelector((state) => state.videogames);
-
+function GameCards({ games }) {
     return (
         <>
             <div className={style.container}>
-                {videogames?.map((game) => (
+                {games?.map((game) => (
                     <GameCard
                         key={game.id}
                         img={game.background_image}
