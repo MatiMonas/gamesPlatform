@@ -1,0 +1,50 @@
+.mainContainer {
+    position: relative;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    /* border: 1px solid red; */
+}
+
+.cardContainer {
+    position: relative;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+img {
+    width: 100%;
+    max-width: 200px;
+}
+.genreContainer {
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.genresList {
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+/* .gameGenres {
+    display: flex;
+    justify-content: space-evenly;
+} */
