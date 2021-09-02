@@ -1,10 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import GameCards from "";
+import style from "./index.module.css";
+import GameCards from "../../Components/GameCards/GameCards";
 // import { Link } from "react-router-dom";
 
 function Home() {
-    return <div></div>;
+    return (
+        <div className={style.mainContainer}>
+            <GameCards className={style.cardContainer} />
+        </div>
+    );
 }
 
 export default Home;
