@@ -5,6 +5,7 @@ import Landing from "./Components/Landing/Landing";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getGames } from "./redux/actions/index";
+import NavBar from "./Components/NavBar/NavBar";
 
 function App() {
     const dispatch = useDispatch();
@@ -15,10 +16,11 @@ function App() {
     return (
         <>
             {/* <Route path="/" component={Nav} /> */}
-            <Switch>
-                <Route path="/" exact component={Landing} />
-                <Route patch="/home" exact component={Home}></Route>
-            </Switch>
+
+            <Route path="/" exact component={Landing} />
+            <Route path="/home" component={NavBar} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/search/:name" exact component={Home}></Route>
         </>
     );
 }
