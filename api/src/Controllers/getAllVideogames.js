@@ -33,7 +33,13 @@ const getAllVideogames = async (req, res, next) => {
                 let game = {
                     id: element.id,
                     name: element.name,
-                    genres: element.genres.map((genre) => genre.name),
+                    background_image: element.background_image,
+                    genres: element.genres.map((genre) => {
+                        return {
+                            name: genre.name,
+                            id: genre.id,
+                        };
+                    }),
                 };
                 return game;
             });
