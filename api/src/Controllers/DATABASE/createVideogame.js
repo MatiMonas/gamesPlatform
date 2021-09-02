@@ -13,7 +13,6 @@ const createVideogame = async (req, res, next) => {
     } = req.body;
 
     try {
-        // const newDate = new Date(releaseDate)
         await GameGenre.findAll({ where: { name: genres } });
         await Videogame.create({
             id: uuidv4(),
@@ -28,21 +27,6 @@ const createVideogame = async (req, res, next) => {
             .then((response) => {
                 return res.send(response);
             });
-
-        // genres.forEach(async (element) => {
-        //     let genre = await GameGenre.findOne({
-        //         where: { name: element },
-        //     });
-        // });
-
-        // platforms.forEach(async (element) => {
-        //     let platform = await Platform.findOne({
-        //         where: { name: element },
-        //     });
-        //     await newGame.addPlatform(platform);
-        // });
-
-        // res.status(200).send("ok");
     } catch (err) {
         next(err);
     }
