@@ -61,12 +61,15 @@ const getAPIVideogames = async (req, res, next) => {
                             id: el.id,
                             name: el.name,
                             background_image: el.background_image,
-                            genres: el.genres
-                                .map((genre) => genre.name)
-                                .join(", "),
-                            platforms: el.platforms
-                                .map((plat) => plat.platform.name)
-                                .join(", "),
+                            genres: el.genres.map((genre) => {
+                                return {
+                                    name: genre.name,
+                                    id: genre.id,
+                                };
+                            }),
+                            platforms: el.platforms.map(
+                                (el) => el.platform.name
+                            ),
                         };
                         return gameData;
                     }
@@ -79,7 +82,7 @@ const getAPIVideogames = async (req, res, next) => {
             })
             .catch((err) => console.err(err));
 
-        return result; //[devuelve 100 juegos]
+        return result; //[devuelve 120 juegos]
     } catch (err) {
         console.error(err);
     }
