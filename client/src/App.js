@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./Components/Home";
+import Home from "./Containers/Home";
 import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import { useDispatch } from "react-redux";
