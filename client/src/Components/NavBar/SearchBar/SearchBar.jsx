@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import style from "./SearchBar.module.css";
+
+function SearchBar() {
+    const [state, setState] = useState({
+        search: "",
+    });
+
+    function handleChange(e) {
+        //creacion de nuevo estado
+        setState((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+    }
+    return (
+        <div className={style.formContainer}>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    onChange={handleChange}
+                    name="search"
+                    value={state.search}
+                    placeholder="Search game..."
+                />
+                {!state.search ? (
+                    <button type="submit" disabled>
+                        Lets Play
+                    </button>
+                ) : (
+                    <Link to={`/search/${state.search}`}>
+                        <button type="submit">Lets Play</button>
+                    </Link>
+                )}
+            </form>
+        </div>
+    );
+}
+
+export default SearchBar;
