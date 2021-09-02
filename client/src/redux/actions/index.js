@@ -25,14 +25,17 @@ export const getGames = () => {
 
 export const searchByName = (name) => {
     return async function (dispatch) {
-        const gameName = await axios.get(`${GAME_URL_NAME}${name}`);
-        dispatch({ type: SEARCH_BY_NAME, payload: gameName.data });
+        await axios
+            .get(`${GAME_URL_NAME}${name}`)
+            .then((res) =>
+                dispatch({ type: SEARCH_BY_NAME, payload: res.data })
+            );
     };
 };
 
 export const searchById = (id) => {
     return async function (dispatch) {
-        const gameID = await axios.get(GAME_ID_URL);
+        const gameID = await axios.get(`${GAME_ID_URL}${id}`);
         dispatch({ type: SEARCH_BY_ID, payload: gameID.data });
     };
 };
