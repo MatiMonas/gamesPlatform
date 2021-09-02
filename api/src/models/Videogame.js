@@ -24,6 +24,9 @@ module.exports = (sequelize) => {
 
         background_image: {
             type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue:
+                "https://www.muycomputer.com/wp-content/uploads/2016/06/Nintendo-64.jpg",
         },
 
         releaseDate: {

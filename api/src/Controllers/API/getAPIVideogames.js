@@ -60,7 +60,9 @@ const getAPIVideogames = async (req, res, next) => {
                         let gameData = {
                             id: el.id,
                             name: el.name,
-                            background_image: el.background_image,
+                            background_image: el.background_image
+                                ? el.background_image
+                                : "https://www.muycomputer.com/wp-content/uploads/2016/06/Nintendo-64.jpg",
                             genres: el.genres.map((genre) => {
                                 return {
                                     name: genre.name,
