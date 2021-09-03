@@ -1,12 +1,13 @@
 import "./App.css";
 import Home from "./Containers/Home";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getGames } from "./redux/actions/index";
-import NavBar from "./Components/NavBar/NavBar";
 import GamesByName from "./Containers/GamesByName/GamesByName";
+import GameDetails from "./Containers/GameDetails/GameDetails";
+import { Error404 } from "./Components/Error404/Error404";
 
 function App() {
     const dispatch = useDispatch();
@@ -16,12 +17,23 @@ function App() {
     }, [dispatch]);
     return (
         <>
-            {/* <Route path="/" component={Nav} /> */}
+            <Switch>
+                <Route path="/" exact component={Landing} />
 
-            <Route path="/" exact component={Landing} />
-            <Route path="/home" component={NavBar} />
-            <Route exact path="/home" component={Home} />
-            <Route path="/search/:name" exact component={GamesByName}></Route>
+                <Route exact path="/home" component={Home} />
+                <Route path="/search/" exact component={Home}></Route>
+                <Route
+                    path="/search/:name"
+                    exact
+                    component={GamesByName}
+                ></Route>
+                <Route
+                    path="/details/:id"
+                    exact
+                    component={GameDetails}
+                ></Route>
+                <Route path="*" component={Error404}></Route>
+            </Switch>
         </>
     );
 }
