@@ -14,6 +14,7 @@ import {
     GET_PLATFORMS,
     GET_GENRES,
     POST_VIDEOGAME,
+    CLEAR_GAME_DETAIL,
 } from "./actionTypes";
 
 export const getGames = () => {
@@ -32,12 +33,18 @@ export const searchByName = (name) => {
             );
     };
 };
+export function clearPage() {
+    return { type: SEARCH_BY_NAME, payload: undefined };
+}
 
 export const searchById = (id) => {
-    return async function (dispatch) {
-        const gameID = await axios.get(`${GAME_ID_URL}${id}`);
-        dispatch({ type: SEARCH_BY_ID, payload: gameID.data });
-    };
+    if (id) {
+        return async function (dispatch) {
+            const gameID = await axios.get(`${GAME_ID_URL}${id}`);
+            dispatch({ type: SEARCH_BY_ID, payload: gameID.data });
+        };
+    }
+    return { type: CLEAR_GAME_DETAIL };
 };
 
 export const getPlatforms = () => {

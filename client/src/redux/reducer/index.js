@@ -5,6 +5,7 @@ import {
     GET_PLATFORMS,
     GET_GENRES,
     POST_VIDEOGAME,
+    CLEAR_GAME_DETAIL,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
     newGame: null,
     genres: [],
     platforms: [],
-    searchByName: [],
+    searchByName: undefined,
     searchById: [],
 };
 
@@ -45,6 +46,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 searchById: payload,
+            };
+        case CLEAR_GAME_DETAIL:
+            return {
+                ...state,
+                searchById: undefined,
             };
         case POST_VIDEOGAME:
             return {
