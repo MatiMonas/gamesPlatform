@@ -36,10 +36,16 @@ const getGameByID = async (req, res, next) => {
                 rating: gameData.rating,
                 description: gameData.description,
                 platforms: gameData.platforms.map((disp) => disp.platform.name),
-                genres: gameData.genres.map((genre) => genre.name),
+                genres: gameData.genres.map((genre) => {
+                    return {
+                        name: genre.name,
+                        id: genre.id,
+                    };
+                }),
             };
             return res.json(game);
         } catch (err) {
+            res.json({ msg: "No game found with that id" });
             next(err);
         }
     }
