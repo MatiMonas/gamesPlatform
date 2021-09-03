@@ -3,9 +3,9 @@ import style from "./Pagination.module.css";
 
 export default function Pagination({ itemsPerPage, totalGames, pagination }) {
     /*----------------PAGINACION---------------*/
-    const pages = [];
-    const numOfPages = Math.ceil(totalGames / itemsPerPage);
-    console.log(itemsPerPage, totalGames);
+    const pages = []; // 120         15
+    const numOfPages = Math.ceil(totalGames / itemsPerPage); // 8
+
     for (let i = 1; i <= numOfPages; i++) {
         pages.push(i);
     }
