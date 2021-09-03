@@ -4,3 +4,4 @@ export const SEARCH_BY_ID = "SEARCH_BY_ID";
 export const GET_PLATFORMS = "GET_PLATFORMS";
 export const GET_GENRES = "GET_GENRES";
 export const POST_VIDEOGAME = "POST_VIDEOGAME";
+export const CLEAR_GAME_DETAIL = "CLEAR_GAME_DETAIL";
