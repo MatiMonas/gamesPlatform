@@ -17,10 +17,13 @@ function SearchBar() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setState(() => ({
+            search: "",
+        }));
     }
     return (
         <div className={style.formContainer}>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input
                     type="text"
                     onChange={handleChange}
@@ -34,7 +37,9 @@ function SearchBar() {
                     </button>
                 ) : (
                     <Link to={`/search/${state.search}`}>
-                        <button type="submit">Lets Play</button>
+                        <button onSubmit={handleSubmit} type="submit">
+                            Lets Play
+                        </button>
                     </Link>
                 )}
             </form>
