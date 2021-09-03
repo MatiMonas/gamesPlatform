@@ -3,6 +3,7 @@ import style from "./index.module.css";
 import GameCards from "../../Components/GameCards/GameCards";
 import { useSelector } from "react-redux";
 import Pagination from "../../Components/Pagination/Pagination";
+import NavBar from "../../Components/NavBar/NavBar";
 
 function Home() {
     const allVideogames = useSelector((state) => state.videogames);
@@ -15,8 +16,8 @@ function Home() {
         setCurrentPage(num);
     }
 
-    let lastItemPerPage = currentPage * itemsPerPage;
-    let firstItemPerPage = lastItemPerPage - itemsPerPage;
+    let lastItemPerPage = currentPage * itemsPerPage; //2 * 15 --> 30
+    let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
     let currentPageItems = allVideogames.slice(
         firstItemPerPage,
         lastItemPerPage
@@ -24,6 +25,9 @@ function Home() {
 
     return (
         <>
+            <div>
+                <NavBar />
+            </div>
             <Pagination
                 itemsPerPage={itemsPerPage}
                 totalGames={allVideogames.length}
