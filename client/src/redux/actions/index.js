@@ -61,9 +61,9 @@ export const getGenres = () => {
     };
 };
 
-export const postGame = () => {
+export const postGame = (game) => {
     return async function (dispatch) {
-        const newGame = await axios.post(GAME_URL);
+        const newGame = await axios.post(GAME_URL, game);
         dispatch({ type: POST_VIDEOGAME, payload: newGame.data });
     };
 };
