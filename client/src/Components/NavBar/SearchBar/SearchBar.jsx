@@ -15,7 +15,7 @@ function SearchBar() {
         }));
     }
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         setState(() => ({
             search: "",
