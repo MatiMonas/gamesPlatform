@@ -25,7 +25,7 @@ const axios = require("axios");
 const { GameGenre } = require("./src/db");
 
 // Syncing all the models at once.
-conn.sync()
+conn.sync({ force: true })
     .then(async () => {
         let temp = await GameGenre.findAll();
         if (temp.length === 0) {
