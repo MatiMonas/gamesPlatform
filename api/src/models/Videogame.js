@@ -30,11 +30,19 @@ module.exports = (sequelize) => {
         },
 
         releaseDate: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
+            validate: {
+                isDate: true,
+            },
         },
 
         rating: {
             type: DataTypes.INTEGER,
+            validate: {
+                min: 0,
+                max: 5,
+            },
+            allowNull: true,
         },
 
         platforms: {
