@@ -4,6 +4,7 @@ import GameCards from "../../Components/GameCards/GameCards";
 import { useSelector } from "react-redux";
 import Pagination from "../../Components/Pagination/Pagination";
 import NavBar from "../../Components/NavBar/NavBar";
+import { Link } from "react-router-dom";
 
 function Home() {
     const allVideogames = useSelector((state) => state.videogames);
@@ -25,16 +26,21 @@ function Home() {
 
     return (
         <>
-            <div>
-                <NavBar />
-            </div>
-            <Pagination
-                itemsPerPage={itemsPerPage}
-                totalGames={allVideogames.length}
-                pagination={pagination}
-            />
-
             <div className={style.mainContainer}>
+                <div>
+                    <NavBar />
+                </div>
+                <div>
+                    <Link to="/create_videogame">
+                        <h1>Agregar videojuego</h1>
+                    </Link>
+                </div>
+                <Pagination
+                    itemsPerPage={itemsPerPage}
+                    totalGames={allVideogames.length}
+                    pagination={pagination}
+                />
+
                 <GameCards games={currentPageItems} />
             </div>
         </>
