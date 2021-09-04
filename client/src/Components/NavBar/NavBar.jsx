@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import style from "./NavBar.module.css";
 import SearchBar from "./SearchBar/SearchBar";
@@ -8,7 +9,9 @@ function NavBar() {
         <>
             <div className={style.mainContainer}>
                 <nav>
-                    <Logo />
+                    <div>
+                        <Logo />
+                    </div>
                     <div>
                         <SearchBar />
                     </div>
