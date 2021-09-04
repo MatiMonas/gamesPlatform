@@ -36,12 +36,14 @@ function VideogameDetail() {
                                 {videoGameDetail.rating}
                             </div>
                             <div>
+                                <p>Description:</p>
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html: videoGameDetail.description,
                                     }}
                                 ></div>
                             </div>
+                            <p>Release date:{videoGameDetail.releaseDate} </p>
                             <p>
                                 Genres:
                                 {videoGameDetail.genres
