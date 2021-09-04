@@ -8,10 +8,12 @@ import { getGames } from "./redux/actions/index";
 import GamesByName from "./Containers/GamesByName/GamesByName";
 import GameDetails from "./Containers/GameDetails/GameDetails";
 import { Error404 } from "./Components/Error404/Error404";
+import CreateGame from "./Containers/CreateGame/CreateGame";
 
 function App() {
     const dispatch = useDispatch();
 
+    //cuando se monta el componente app
     useEffect(() => {
         dispatch(getGames());
     }, [dispatch]);
@@ -31,6 +33,11 @@ function App() {
                     path="/details/:id"
                     exact
                     component={GameDetails}
+                ></Route>
+                <Route
+                    path="/create_videogame"
+                    exact
+                    component={CreateGame}
                 ></Route>
                 <Route path="*" component={Error404}></Route>
             </Switch>
