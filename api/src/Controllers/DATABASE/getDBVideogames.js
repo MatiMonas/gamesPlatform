@@ -1,6 +1,6 @@
 const { Videogame, GameGenre, Platform } = require("../../db");
 
-const getDBVideogames = async (req, res, next) => {
+const getDBVideogames = async (_req, _res, next) => {
     try {
         const getDBVideogames = await Videogame.findAll(
             {
