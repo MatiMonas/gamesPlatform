@@ -59,10 +59,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
 
         /*---------ORDERS---------*/
         case ORDER_ASC:
-            const games = state.allVideogames;
             const AZGames =
                 payload === "AZ"
-                    ? games.sort((a, b) => {
+                    ? state.videogames.sort((a, b) => {
                           if (a.name > b.name) {
                               return 1;
                           }
@@ -71,14 +70,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           }
                           return 0;
                       })
-                    : games;
+                    : state.videogames;
+
             return { ...state, videogames: AZGames };
 
         case ORDER_DESC:
-            let games1 = state.allVideogames;
             const ZAgames =
                 payload === "ZA"
-                    ? games1.sort((a, b) => {
+                    ? state.videogames.sort((a, b) => {
                           if (a.name < b.name) {
                               return 1;
                           }
@@ -87,13 +86,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           }
                           return 0;
                       })
-                    : games1;
+                    : state.videogames;
             return { ...state, videogames: ZAgames };
 
         case ORDER_MORE_RATING:
             const moreRating =
                 payload === "asc"
-                    ? state.allVideogames.sort((a, b) => {
+                    ? state.videogames.sort((a, b) => {
                           if (Number(a.rating) < Number(b.rating)) {
                               return 1;
                           }
@@ -102,13 +101,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           }
                           return 0;
                       })
-                    : state.allVideogames;
+                    : state.videogames;
             return { ...state, videogames: moreRating };
 
         case ORDER_LESS_RATING:
             const lessRating =
                 payload === "des"
-                    ? state.allVideogames.sort((a, b) => {
+                    ? state.videogames.sort((a, b) => {
                           if (Number(a.rating) > Number(b.rating)) {
                               return 1;
                           }
@@ -117,7 +116,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           }
                           return 0;
                       })
-                    : state.allVideogames;
+                    : state.videogames;
             return { ...state, videogames: lessRating };
 
         default:

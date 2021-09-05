@@ -1,23 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./OrderAZInput.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getGenres, orderAz, orderZa } from "../../../redux/actions";
 
-function Order() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getGenres());
-    }, [dispatch]);
-
-    const handleOrder = (e) => {
-        if (e.target.value === "AZ") {
-            dispatch(orderAz(e.target.value));
-        } else if (e.target.value === "ZA") {
-            dispatch(orderZa(e.target.value));
-        }
-    };
-
+function Order({ handleOrder }) {
     return (
         <>
             <div className={style.mainContainer}>
@@ -47,7 +31,7 @@ function Order() {
                         Most Rating
                         <span></span>
                     </label>
-                    <label className={style.radio} l>
+                    <label className={style.radio}>
                         <input type="radio" name="order" value="des" />
                         Less Rating
                         <span></span>
