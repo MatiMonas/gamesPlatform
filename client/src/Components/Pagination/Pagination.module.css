@@ -8,8 +8,12 @@
 .pag button {
     background: none;
     border: none;
-    color: black;
+
     font-weight: 600;
     font-size: 25px;
     letter-spacing: 25px;
+}
+
+.pag button:hover {
+    cursor: pointer;
 }

@@ -25,6 +25,7 @@ function SearchBar() {
         <div className={style.formContainer}>
             <form>
                 <input
+                    className={style.inputSearch}
                     type="text"
                     onChange={handleChange}
                     name="search"

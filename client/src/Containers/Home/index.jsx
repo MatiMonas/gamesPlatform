@@ -1,34 +1,94 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
 import GameCards from "../../Components/GameCards/GameCards";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../Components/Pagination/Pagination";
 import NavBar from "../../Components/NavBar/NavBar";
 import { Link } from "react-router-dom";
+import Order from "../../Components/Filters/Order/Order";
+import {
+    getGames,
+    getGenres,
+    orderAz,
+    orderZa,
+    moreRating,
+    lessRating,
+} from "../../redux/actions";
+// import OrderRating from "../../Components/Filters/OrderRating/OrderRating";
 
 function Home() {
-    const allVideogames = useSelector((state) => state.videogames);
-
+    const dispatch = useDispatch();
+    const videogames = useSelector((state) => state.videogames);
+    // const genres = useSelector((state) => state.genres);
+    const [order, setOrder] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(15);
+
+    let lastItemPerPage = currentPage * itemsPerPage; //2 * 15 --> 30
+    let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
+    let currentPageItems = videogames.slice(firstItemPerPage, lastItemPerPage);
+
+    useEffect(() => {
+        dispatch(getGenres());
+    }, [dispatch]);
 
     function pagination(e, num) {
         e.preventDefault();
         setCurrentPage(num);
     }
+    const handleOrder = (e) => {
+        if (e.target.value === "All") dispatch(getGames());
+        if (e.target.value === "AZ") dispatch(orderAz(e.target.value));
+        if (e.target.value === "ZA") dispatch(orderZa(e.target.value));
+        if (e.target.value === "asc") dispatch(moreRating(e.target.value));
+        if (e.target.value === "des") dispatch(lessRating(e.target.value));
 
-    let lastItemPerPage = currentPage * itemsPerPage; //2 * 15 --> 30
-    let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
-    let currentPageItems = allVideogames.slice(
-        firstItemPerPage,
-        lastItemPerPage
-    );
+        setCurrentPage(1);
+        setOrder(e.target.value);
+    };
 
     return (
         <>
             <div className={style.mainContainer}>
-                <div>
-                    <NavBar />
+                <NavBar />
+                <div className={style.mainContainer}>
+                    <h4>Order</h4>
+                    <div
+                        className={style.radioGroup}
+                        onChange={(e) => handleOrder(e)}
+                    >
+                        <label className={style.radio}>
+                            <input
+                                type="radio"
+                                default
+                                name="order"
+                                value="All"
+                            />
+                            No order
+                            <span></span>
+                        </label>
+                        <label className={style.radio}>
+                            <input type="radio" name="order" value="AZ" />
+                            Order AZ
+                            <span></span>
+                        </label>
+                        <label className={style.radio}>
+                            <input type="radio" name="order" value="ZA" />
+                            Order ZA
+                            <span></span>
+                        </label>
+
+                        <label className={style.radio}>
+                            <input type="radio" name="order" value="asc" />
+                            Most Rating
+                            <span></span>
+                        </label>
+                        <label className={style.radio} l>
+                            <input type="radio" name="order" value="des" />
+                            Less Rating
+                            <span></span>
+                        </label>
+                    </div>
                 </div>
                 <div>
                     <Link to="/create_videogame">
@@ -37,7 +97,7 @@ function Home() {
                 </div>
                 <Pagination
                     itemsPerPage={itemsPerPage}
-                    totalGames={allVideogames.length}
+                    totalGames={videogames.length}
                     pagination={pagination}
                 />
 

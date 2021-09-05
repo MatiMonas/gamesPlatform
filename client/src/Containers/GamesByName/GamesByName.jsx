@@ -15,6 +15,7 @@ function GamesByName() {
         dispatch(searchByName(name));
         return () => dispatch(clearPage());
     }, [dispatch, name]);
+   
 
     return (
         <>

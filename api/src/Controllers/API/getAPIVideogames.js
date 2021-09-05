@@ -23,7 +23,7 @@ const getAPIVideogames = async (req, res, next) => {
                             id: el.id,
                             name: el.name,
                             background_image: el.background_image,
-
+                            rating: el.rating,
                             genres: el.genres.map((genre) => {
                                 return {
                                     name: genre.name,

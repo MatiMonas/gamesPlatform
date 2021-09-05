@@ -7,16 +7,6 @@ import { PLATFORMS_URL } from "../../constants";
 import { useDispatch } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
 
-// const {
-//     name,
-//     description,
-//     background_image,
-//     releaseDate,
-//     rating,
-//     genres, //["miedo", "actions" ]
-//     platforms, //["ps5"]
-// } = req.body;
-
 function CreateGame() {
     const dispatch = useDispatch();
     const [videogame, setVideogame] = useState({
@@ -51,13 +41,6 @@ function CreateGame() {
             });
     }, []);
 
-    //convierto en un array filtrado (sin repeticiones) mis plataformas y las ordeno alfabeticamente
-    const platformNames = platforms.map((e) => e.name);
-    const data = new Set(platformNames);
-    let result = [...data].sort();
-
-    // const platform = [...new Set(platforms)];
-
     /*----------------FUNCTIONS---------------*/
 
     function addGenreToVideogame(id) {
@@ -73,6 +56,19 @@ function CreateGame() {
         });
     }
 
+    /*----------------TRANSFORMATIONS---------------*/
+
+    //Converting the array of number(ids) to an array of string
+    let genresResult = Array.from(videogame.genres.toString()).filter(
+        (el) => el !== ","
+    );
+
+    //Doing a map from platforms, filtering the repeated values with a set and making it an array to iterate the values
+    let otherPlatforms = ["iOs", "PlayStation 3", "Xbox Series"];
+    const platformNames = platforms.map((e) => e.name);
+    const data = new Set(platformNames);
+    let result = [...data, ...otherPlatforms].sort();
+
     /*----------------HANDLERS---------------*/
     function handleChange(e) {
         if (e.target.name === "genres" || e.target.name === "platforms") {
@@ -86,12 +82,13 @@ function CreateGame() {
                 ...prevState,
                 [e.target.name]: e.target.value,
             }));
+            if (videogame.name) {
+                videogame.name =
+                    videogame.name[0].toUpperCase() +
+                    videogame.name.substring(1);
+            }
         }
     }
-
-    let convert = videogame.genres.toString();
-    let toArray = Array.from(convert);
-    let genresResult = toArray.filter((el) => el !== ",");
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -104,7 +101,8 @@ function CreateGame() {
             genres: genresResult,
             platforms: videogame.platforms,
         };
-        console.log(newGame);
+
+        //posting the game
         dispatch(postGame(newGame));
         dispatch(getGames());
     }

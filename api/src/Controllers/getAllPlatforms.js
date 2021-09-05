@@ -9,7 +9,9 @@ const getAllPlatforms = async (req, res) => {
         const gameData = getGames.data?.results;
         gameData.map(async (element) => {
             await Platform.findOrCreate({
-                where: { name: element.platforms[0].platform.name },
+                where: {
+                    name: element.platforms[0].platform.name,
+                },
             });
         });
         const DBPlatforms = await Platform.findAll();

@@ -1,7 +1,5 @@
 //traigo todos los generos de la api y me los guardo en mi database
 
-const { GENRES_URL } = require("../../utils/constants");
-const axios = require("axios");
 const { GameGenre } = require("../../db");
 
 const getGameGenres = async (_req, res) => {

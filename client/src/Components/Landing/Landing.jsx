@@ -7,9 +7,9 @@ function LandingPage() {
         <>
             <div>
                 <div className={style.container}>SOY LANDING PAGE</div>
-                <button>
-                    <Link to="/home">Click</Link>
-                </button>
+                <Link to="/home">
+                    <button>Click</button>
+                </Link>
             </div>
         </>
     );
