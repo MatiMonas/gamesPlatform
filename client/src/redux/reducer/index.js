@@ -7,6 +7,7 @@ import {
     POST_VIDEOGAME,
     CLEAR_GAME_DETAIL,
     NO_ORDER,
+    NO_ORDER_SEARCH_GAMES,
     ORDER_ASC,
     ORDER_DESC,
     ORDER_MORE_RATING,
@@ -15,28 +16,27 @@ import {
     // FILTER_ORIGIN,
     // FILTER_GENRES,
 } from "../actions/actionTypes";
+import { orderRating, orderAlph } from "../../Utils/orders";
 
 const initialState = {
     videogames: [],
     filteredVideogames: [],
-    showDisplay: [],
     newGame: null,
     genres: [],
     platforms: [],
     searchByName: undefined,
+    filtersByName: [],
     searchById: [],
-
     isLoading: false,
 };
 export default function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
         /*---------GETTERS---------*/
         case GET_GAMES:
-            let filtered = payload;
             return {
                 ...state,
                 videogames: payload,
-                filteredVideogames: filtered,
+                filteredVideogames: payload,
             };
 
         case GET_GENRES:
@@ -46,7 +46,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return { ...state, platforms: payload };
 
         case SEARCH_BY_NAME:
-            return { ...state, searchByName: payload };
+            return { ...state, searchByName: payload, filtersByName: payload };
 
         case SEARCH_BY_ID:
             return { ...state, searchById: payload };
@@ -60,7 +60,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
         /*---------FILTERS---------*/
 
         /*---------ORDERS---------*/
-
+        //This to functions resets to the original order
         case NO_ORDER:
             let copyOriginal = [...state.videogames];
             return {
@@ -68,72 +68,71 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 filteredVideogames: [...copyOriginal],
             };
 
-        case ORDER_ASC:
-            let copy = [...state.filteredVideogames];
-            const AZGames =
-                payload === "AZ"
-                    ? copy.sort((a, b) => {
-                          if (a.name > b.name) {
-                              return 1;
-                          }
-                          if (a.name < b.name) {
-                              return -1;
-                          }
-                          return 0;
-                      })
-                    : state.videogames;
+        case NO_ORDER_SEARCH_GAMES:
+            let byNameCopy = [...state.searchByName];
+            return { ...state, filtersByName: [...byNameCopy] };
 
-            return { ...state, filteredVideogames: [...AZGames] };
+        /*----------------------------------*/
+        case ORDER_ASC:
+            if (state.searchByName !== undefined) {
+                let nameCopy = [...state.searchByName];
+                let result = orderAlph(nameCopy, "AZ");
+                return { ...state, filtersByName: [...result] };
+            } else if (state.videogames) {
+                let copy = [...state.videogames];
+                let result = orderAlph(copy, "AZ");
+                return { ...state, filteredVideogames: [...result] };
+            }
+            return;
 
         case ORDER_DESC:
-            let copy1 = [...state.filteredVideogames];
-            const ZAgames =
-                payload === "ZA"
-                    ? copy1.sort((a, b) => {
-                          if (a.name < b.name) {
-                              return 1;
-                          }
-                          if (a.name > b.name) {
-                              return -1;
-                          }
-                          return 0;
-                      })
-                    : state.videogames;
-            return { ...state, filteredVideogames: [...ZAgames] };
+            if (state.searchByName !== undefined) {
+                let nameCopy = [...state.searchByName];
+                let result = orderAlph(nameCopy, "ZA");
+                return { ...state, filtersByName: [...result] };
+            } else if (state.videogames) {
+                let copy = [...state.videogames];
+                let result = orderAlph(copy, "ZA");
+                return { ...state, filteredVideogames: [...result] };
+            }
+            return;
 
         case ORDER_MORE_RATING:
-            let copy2 = [...state.filteredVideogames];
-            const moreRating =
-                payload === "asc"
-                    ? copy2.sort((a, b) => {
-                          if (Number(a.rating) < Number(b.rating)) {
-                              return 1;
-                          }
-                          if (Number(a.rating) > Number(b.rating)) {
-                              return -1;
-                          }
-                          return 0;
-                      })
-                    : state.videogames;
-            return { ...state, filteredVideogames: [...moreRating] };
+            if (state.searchByName !== undefined) {
+                let nameCopy = [...state.searchByName];
+                let result = orderRating(nameCopy, "asc");
+                return { ...state, filtersByName: [...result] };
+            } else if (state.videogames) {
+                let copy = [...state.videogames];
+                let result = orderRating(copy, "asc");
+                return { ...state, filteredVideogames: [...result] };
+            }
+            return;
 
         case ORDER_LESS_RATING:
-            let copy3 = [...state.filteredVideogames];
-            const lessRating =
-                payload === "des"
-                    ? copy3.sort((a, b) => {
-                          if (Number(a.rating) > Number(b.rating)) {
-                              return 1;
-                          }
-                          if (Number(a.rating) < Number(b.rating)) {
-                              return -1;
-                          }
-                          return 0;
-                      })
-                    : state.videogames;
-            return { ...state, filteredVideogames: [...lessRating] };
-
+            if (state.searchByName !== undefined) {
+                let nameCopy = [...state.searchByName];
+                let result = orderRating(nameCopy, "des");
+                return { ...state, filtersByName: [...result] };
+            } else if (state.videogames) {
+                let copy = [...state.videogames];
+                let result = orderRating(copy, "des");
+                return { ...state, filteredVideogames: [...result] };
+            }
+            return;
+        /*-------------------------*/
         default:
             return state;
     }
 }
+
+// copy.sort((a, b) => {
+//     if (a.name > b.name) {
+//         return 1;
+//     }
+//     if (a.name < b.name) {
+//         return -1;
+//     }
+//     return 0;
+// })
+// : state.videogames;

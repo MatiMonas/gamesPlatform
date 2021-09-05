@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getGames } from "./redux/actions/index";
+import { getGames, getGenres } from "./redux/actions/index";
 import GamesByName from "./Containers/GamesByName/GamesByName";
 import GameDetails from "./Containers/GameDetails/GameDetails";
 import { Error404 } from "./Components/Error404/Error404";
@@ -16,6 +16,7 @@ function App() {
     //cuando se monta el componente app
     useEffect(() => {
         dispatch(getGames());
+        dispatch(getGenres());
     }, [dispatch]);
     return (
         <>

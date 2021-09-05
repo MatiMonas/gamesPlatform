@@ -20,8 +20,9 @@ import {
     ORDER_MORE_RATING,
     ORDER_LESS_RATING,
     NO_ORDER,
+    NO_ORDER_SEARCH_GAMES,
+    FILTER_GENRES,
     // FILTER_ORIGIN,
-    // FILTER_GENRES,
     // SHOW_GAMES,
 } from "./actionTypes";
 
@@ -78,9 +79,16 @@ export const postGame = (game) => {
 
 /*----------------------------FILTERING------------------------------*/
 
+export const filterByGenre = (payload) => {
+    return { type: FILTER_GENRES, payload };
+};
+
 /*----------------BY ORDER-----------------*/
-export function noOrder(payload) {
-    return { type: NO_ORDER, payload };
+export function noOrder() {
+    return { type: NO_ORDER };
+}
+export function noOrderSearchGames() {
+    return { type: NO_ORDER_SEARCH_GAMES };
 }
 
 export function orderAz(payload) {
