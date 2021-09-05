@@ -18,7 +18,7 @@ import style from "./GamesByName.module.css";
 function GamesByName() {
     const dispatch = useDispatch();
     let { name } = useParams();
-    const [order, setOrder] = useState("");
+    const [, setOrder] = useState("");
     const videogameNames = useSelector((state) => state.searchByName);
 
     useEffect(() => {

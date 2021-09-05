@@ -1,5 +1,4 @@
 import axios from "axios";
-import { orderAlphFunc, orderRatingFunc } from "../../Utils/orders";
 import {
     GAMES_URL,
     GAME_URL_NAME,
@@ -20,9 +19,10 @@ import {
     ORDER_DESC,
     ORDER_MORE_RATING,
     ORDER_LESS_RATING,
-    FILTER_ORIGIN,
-    FILTER_GENRES,
-    SHOW_GAMES,
+    NO_ORDER,
+    // FILTER_ORIGIN,
+    // FILTER_GENRES,
+    // SHOW_GAMES,
 } from "./actionTypes";
 
 export const getGames = () => {
@@ -79,6 +79,9 @@ export const postGame = (game) => {
 /*----------------------------FILTERING------------------------------*/
 
 /*----------------BY ORDER-----------------*/
+export function noOrder(payload) {
+    return { type: NO_ORDER, payload };
+}
 
 export function orderAz(payload) {
     return { type: ORDER_ASC, payload };

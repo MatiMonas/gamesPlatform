@@ -13,20 +13,25 @@ import {
     orderZa,
     moreRating,
     lessRating,
+    noOrder,
 } from "../../redux/actions";
 // import OrderRating from "../../Components/Filters/OrderRating/OrderRating";
 
 function Home() {
     const dispatch = useDispatch();
+    const filteredVideogames = useSelector((state) => state.filteredVideogames);
     const videogames = useSelector((state) => state.videogames);
     // const genres = useSelector((state) => state.genres);
-    const [order, setOrder] = useState("");
+    const [, setOrder] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(15);
 
     let lastItemPerPage = currentPage * itemsPerPage; //2 * 15 --> 30
     let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
-    let currentPageItems = videogames.slice(firstItemPerPage, lastItemPerPage);
+    let currentPageItems = filteredVideogames.slice(
+        firstItemPerPage,
+        lastItemPerPage
+    );
 
     useEffect(() => {
         dispatch(getGenres());
@@ -37,7 +42,8 @@ function Home() {
         setCurrentPage(num);
     }
     const handleOrder = (e) => {
-        if (e.target.value === "All") dispatch(getGames());
+        // if (e.target.value === "All") dispatch(getGames());
+        if (e.target.value === "All") dispatch(noOrder(e.target.value));
         if (e.target.value === "AZ") dispatch(orderAz(e.target.value));
         if (e.target.value === "ZA") dispatch(orderZa(e.target.value));
         if (e.target.value === "asc") dispatch(moreRating(e.target.value));
@@ -50,20 +56,22 @@ function Home() {
     return (
         <>
             <div className={style.mainContainer}>
-                <NavBar />
-                <Order handleOrder={handleOrder} />
                 <div>
-                    <Link to="/create_videogame">
-                        <h1>Agregar videojuego</h1>
-                    </Link>
-                </div>
-                <Pagination
-                    itemsPerPage={itemsPerPage}
-                    totalGames={videogames.length}
-                    pagination={pagination}
-                />
+                    <NavBar />
+                    <Order handleOrder={handleOrder} />
+                    <div>
+                        <Link to="/create_videogame">
+                            <h1>Agregar videojuego</h1>
+                        </Link>
+                    </div>
+                    <Pagination
+                        itemsPerPage={itemsPerPage}
+                        totalGames={videogames.length}
+                        pagination={pagination}
+                    />
 
-                <GameCards games={currentPageItems} />
+                    <GameCards games={currentPageItems} />
+                </div>
             </div>
         </>
     );

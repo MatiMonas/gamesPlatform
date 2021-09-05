@@ -6,35 +6,37 @@ import {
     GET_GENRES,
     POST_VIDEOGAME,
     CLEAR_GAME_DETAIL,
+    NO_ORDER,
     ORDER_ASC,
     ORDER_DESC,
     ORDER_MORE_RATING,
     ORDER_LESS_RATING,
-    FILTER_ORIGIN,
-    FILTER_GENRES,
+
+    // FILTER_ORIGIN,
+    // FILTER_GENRES,
 } from "../actions/actionTypes";
 
 const initialState = {
     videogames: [],
-    allVideogames: [],
+    filteredVideogames: [],
     showDisplay: [],
     newGame: null,
     genres: [],
     platforms: [],
     searchByName: undefined,
     searchById: [],
-    filterBy: "All",
-    orderBy: "Select",
+
     isLoading: false,
 };
 export default function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
         /*---------GETTERS---------*/
         case GET_GAMES:
+            let filtered = payload;
             return {
                 ...state,
                 videogames: payload,
-                allVideogames: payload,
+                filteredVideogames: filtered,
             };
 
         case GET_GENRES:
@@ -58,10 +60,19 @@ export default function rootReducer(state = initialState, { type, payload }) {
         /*---------FILTERS---------*/
 
         /*---------ORDERS---------*/
+
+        case NO_ORDER:
+            let copyOriginal = [...state.videogames];
+            return {
+                ...state,
+                filteredVideogames: [...copyOriginal],
+            };
+
         case ORDER_ASC:
+            let copy = [...state.filteredVideogames];
             const AZGames =
                 payload === "AZ"
-                    ? state.videogames.sort((a, b) => {
+                    ? copy.sort((a, b) => {
                           if (a.name > b.name) {
                               return 1;
                           }
@@ -72,12 +83,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
                       })
                     : state.videogames;
 
-            return { ...state, videogames: AZGames };
+            return { ...state, filteredVideogames: [...AZGames] };
 
         case ORDER_DESC:
+            let copy1 = [...state.filteredVideogames];
             const ZAgames =
                 payload === "ZA"
-                    ? state.videogames.sort((a, b) => {
+                    ? copy1.sort((a, b) => {
                           if (a.name < b.name) {
                               return 1;
                           }
@@ -87,12 +99,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           return 0;
                       })
                     : state.videogames;
-            return { ...state, videogames: ZAgames };
+            return { ...state, filteredVideogames: [...ZAgames] };
 
         case ORDER_MORE_RATING:
+            let copy2 = [...state.filteredVideogames];
             const moreRating =
                 payload === "asc"
-                    ? state.videogames.sort((a, b) => {
+                    ? copy2.sort((a, b) => {
                           if (Number(a.rating) < Number(b.rating)) {
                               return 1;
                           }
@@ -102,12 +115,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           return 0;
                       })
                     : state.videogames;
-            return { ...state, videogames: moreRating };
+            return { ...state, filteredVideogames: [...moreRating] };
 
         case ORDER_LESS_RATING:
+            let copy3 = [...state.filteredVideogames];
             const lessRating =
                 payload === "des"
-                    ? state.videogames.sort((a, b) => {
+                    ? copy3.sort((a, b) => {
                           if (Number(a.rating) > Number(b.rating)) {
                               return 1;
                           }
@@ -117,7 +131,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
                           return 0;
                       })
                     : state.videogames;
-            return { ...state, videogames: lessRating };
+            return { ...state, filteredVideogames: [...lessRating] };
 
         default:
             return state;

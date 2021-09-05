@@ -11,4 +11,4 @@ export const ORDER_MORE_RATING = "ORDER_MORE_RATING,";
 export const ORDER_LESS_RATING = "ORDER_LESS_RATING,";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const FILTER_GENRES = "FILTER_GENRES";
-export const SHOW_GAMES = "SHOW_GAMES";
+export const NO_ORDER = "NO_ORDER";
