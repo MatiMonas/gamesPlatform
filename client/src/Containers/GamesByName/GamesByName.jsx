@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import GameCards from "../../Components/GameCards/GameCards";
 import NavBar from "../../Components/NavBar/NavBar";
-import Order from "../../Components/SideBar/Filters/Order/Order";
 import SideBar from "../../Components/SideBar/SideBar";
 import {
     clearPage,
-    getGames,
     lessRating,
     moreRating,
     noOrderSearchGames,

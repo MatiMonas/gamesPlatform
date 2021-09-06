@@ -30,7 +30,7 @@ function SearchBar() {
                     onChange={handleChange}
                     name="search"
                     id="search"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={state.search}
                     placeholder="🔍"
                 />

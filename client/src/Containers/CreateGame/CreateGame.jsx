@@ -6,7 +6,7 @@ import { GENRES_URL } from "../../constants";
 import { PLATFORMS_URL } from "../../constants";
 import { useDispatch } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function CreateGame() {
     const dispatch = useDispatch();
