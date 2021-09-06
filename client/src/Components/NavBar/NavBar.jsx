@@ -8,8 +8,10 @@ function NavBar() {
         <>
             <div className={style.navbar}>
                 <nav>
-                    <Logo />
-                    <SearchBar className={style.searchBar} />
+                    <div className={style.inputContainer}>
+                        <Logo />
+                        <SearchBar className={style.searchBar} />
+                    </div>
                 </nav>
             </div>
         </>

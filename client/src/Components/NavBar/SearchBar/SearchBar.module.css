@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.searchBar {
+    width: 40vw;
+    height: 40px;
+    border-radius: 50px 0px 0px 50px;
+    border: 1px solid;
+    border-right: none;
+    background-color: transparent;
+    padding: 1em;
+
+    /* position: absolute; */
+    /* transform: translate(-50%, -165%); */
+}
+
+.label {
+    position: absolute;
+    left: 4%;
+    bottom: 20%;
+    font-size: 0.97em;
+    color: white;
+    transform-origin: 0 0;
+    transition: transform 0.2s ease-in-out;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    transform: translateY(-2em) scale(0.7);
+    color: white;
+}
+
+.button {
+    position: relative;
+    height: 40px;
+    top: -1px;
+    padding-right: 1em;
+    border: 1px solid;
+    border-left: none;
+    border-radius: 0 50px 50px 0px;
+    background-color: transparent;
+    font-family: "Poppins";
+    /* position: absolute; */
+    /* transform: translate(-50%, -165%); */
+}
+
+.button:active,
+.button:focus {
+    outline: none;
+}
+.searchBar:focus {
+    outline: none;
+}
