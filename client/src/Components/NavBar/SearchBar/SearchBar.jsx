@@ -22,23 +22,30 @@ function SearchBar() {
         }));
     }
     return (
-        <div className={style.formContainer}>
+        <div className={style.container}>
             <form>
                 <input
-                    className={style.inputSearch}
+                    className={style.searchBar}
                     type="text"
                     onChange={handleChange}
                     name="search"
+                    id="search"
+                    autocomplete="off"
                     value={state.search}
                     placeholder="Search game..."
                 />
+                {/* <label>Search game...</label> */}
                 {!state.search ? (
-                    <button type="submit" disabled>
+                    <button className={style.button} type="submit" disabled>
                         Lets Play
                     </button>
                 ) : (
                     <Link to={`/search/${state.search}`}>
-                        <button onSubmit={handleSubmit} type="submit">
+                        <button
+                            className={style.button}
+                            onSubmit={handleSubmit}
+                            type="submit"
+                        >
                             Lets Play
                         </button>
                     </Link>

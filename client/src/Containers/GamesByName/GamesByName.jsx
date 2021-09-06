@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import GameCards from "../../Components/GameCards/GameCards";
 import NavBar from "../../Components/NavBar/NavBar";
 import Order from "../../Components/SideBar/Filters/Order/Order";
+import SideBar from "../../Components/SideBar/SideBar";
 import {
     clearPage,
     getGames,
@@ -37,23 +38,34 @@ function GamesByName() {
     };
 
     return (
-        <>
-            <div>
+        <div className={style.mainContainer}>
+            <div className={style.navContainer}>
                 <NavBar />
-                <Order handleOrder={handleOrder} />
-            </div>
-            <div>
-                <div className={style.mainContainer}>
-                    {videogameNames?.length ? (
-                        <GameCards games={videogameNames} />
-                    ) : videogameNames === undefined ? (
-                        <h1>Cargando...</h1>
-                    ) : (
-                        <h1>Mario se perdio en la selva</h1>
-                    )}
+
+                <div>
+                    <Link to="/create_videogame">
+                        <h2>Agregar videojuego</h2>
+                    </Link>
                 </div>
             </div>
-        </>
+            <div className={style.bodyContainer}>
+                <div className={style.sideBar}>
+                    <SideBar handleOrder={handleOrder} />
+                </div>
+
+                <div className={style.body}>
+                    <div className={style.mainContainer}>
+                        {videogameNames?.length ? (
+                            <GameCards games={videogameNames} />
+                        ) : videogameNames === undefined ? (
+                            <h1>Cargando...</h1>
+                        ) : (
+                            <h1>Mario se perdio en la selva</h1>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

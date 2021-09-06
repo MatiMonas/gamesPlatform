@@ -8,9 +8,9 @@ function SideBar({ handleOrder }) {
             <div>
                 <Order handleOrder={handleOrder} />
             </div>
-            <div>{/* <Genre /> */}</div>
-            <div>{/* order por genero */}</div>
-            <div>{/* orden por origen */}</div>
+            <div>
+                <Genre />
+            </div>
         </>
     );
 }

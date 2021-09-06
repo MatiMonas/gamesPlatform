@@ -11,13 +11,13 @@ export default function Pagination({ itemsPerPage, totalGames, pagination }) {
     }
 
     return (
-        <nav className={style.pag}>
+        <div className={style.pag}>
             {" "}
             {pages.map((num) => (
                 <div key={num} className={style.item}>
                     <button onClick={(e) => pagination(e, num)}>{num}</button>
                 </div>
             ))}
-        </nav>
+        </div>
     );
 }

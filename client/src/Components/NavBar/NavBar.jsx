@@ -6,10 +6,10 @@ import SearchBar from "./SearchBar/SearchBar";
 function NavBar() {
     return (
         <>
-            <div className={style.mainContainer}>
+            <div className={style.navbar}>
                 <nav>
                     <Logo />
-                    <SearchBar />
+                    <SearchBar className={style.searchBar} />
                 </nav>
             </div>
         </>

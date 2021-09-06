@@ -5,7 +5,7 @@ function Order({ handleOrder }) {
     return (
         <>
             <div className={style.mainContainer}>
-                <h4>Order by</h4>
+                <h2>Order</h2>
                 <div
                     className={style.radioGroup}
                     onChange={(e) => handleOrder(e)}
@@ -25,22 +25,15 @@ function Order({ handleOrder }) {
                         Order ZA
                         <span></span>
                     </label>
-                </div>
 
-                <div
-                    className={style.radioGroup}
-                    onChange={(e) => handleOrder(e)}
-                >
-                    {" "}
-                    <h5>Rating</h5>
                     <label className={style.radio}>
-                        <input type="radio" name="rating" value="asc" />
-                        Most Rating
+                        <input type="radio" name="order" value="asc" />
+                        Most Popular
                         <span></span>
                     </label>
                     <label className={style.radio}>
-                        <input type="radio" name="rating" value="des" />
-                        Less Rating
+                        <input type="radio" name="order" value="des" />
+                        Less Popular
                         <span></span>
                     </label>
                 </div>

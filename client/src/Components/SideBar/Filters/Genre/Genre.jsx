@@ -7,11 +7,16 @@ function Genre({ handleOrder }) {
     return (
         <>
             <div className={style.mainContainer}>
-                <h4>Genres</h4>
+                <h2>Genres</h2>
                 <div
                     className={style.radioGroup}
-                    onChange={(e) => handleOrder(e)}
+                    // onChange={(e) => handleOrder(e)}
                 >
+                    <label className={style.radio}>
+                        <input type="radio" default name="genre" value="All" />
+                        All
+                        <span></span>
+                    </label>
                     {genres?.map((el) => (
                         <label key={el.id} className={style.radio}>
                             <input

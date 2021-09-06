@@ -2,16 +2,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    /* border: 1px red solid; */
+    top: -30px;
+    position: absolute;
 }
 
 .pag button {
-    background: none;
     border: none;
-
+    background-color: transparent;
     font-weight: 600;
-    font-size: 25px;
-    letter-spacing: 25px;
+    font-size: 1.2rem;
+    letter-spacing: 10px;
 }
 
 .pag button:hover {

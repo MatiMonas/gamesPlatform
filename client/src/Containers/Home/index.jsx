@@ -48,21 +48,46 @@ function Home() {
     return (
         <>
             <div className={style.mainContainer}>
-                <div>
+                <div className={style.navContainer}>
                     <NavBar />
-                    <SideBar handleOrder={handleOrder} />
+
                     <div>
                         <Link to="/create_videogame">
-                            <h1>Agregar videojuego</h1>
+                            <h2>Agregar videojuego</h2>
                         </Link>
                     </div>
-                    <Pagination
-                        itemsPerPage={itemsPerPage}
-                        totalGames={filteredVideogames?.length}
-                        pagination={pagination}
-                    />
+                </div>
+                <div className={style.bodyContainer}>
+                    <div className={style.sideBar}>
+                        <SideBar handleOrder={handleOrder} />
+                    </div>
 
-                    <GameCards games={currentPageItems} />
+                    <div className={style.body}>
+                        {!filteredVideogames.length ? (
+                            <div className={style.contentContainer}>
+                                <h1>Cargando...</h1>
+                            </div>
+                        ) : (
+                            <div className={style.contentContainer}>
+                                <div className={style.pages}>
+                                    <Pagination
+                                        itemsPerPage={itemsPerPage}
+                                        totalGames={filteredVideogames?.length}
+                                        pagination={pagination}
+                                    />
+                                </div>
+
+                                <GameCards games={currentPageItems} />
+                                <div className={style.pages2}>
+                                    <Pagination
+                                        itemsPerPage={itemsPerPage}
+                                        totalGames={filteredVideogames?.length}
+                                        pagination={pagination}
+                                    />
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

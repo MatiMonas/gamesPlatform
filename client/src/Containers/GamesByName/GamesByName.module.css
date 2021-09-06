@@ -1,51 +1,33 @@
 .mainContainer {
-    border-bottom: 1px white solid;
+    /* background-color: black; */
+    background-color: #151515;
 }
 
-.radioGroup {
+.navContainer {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    height: 15vh;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: space-between;
 }
-.radio {
-    font-size: 13px;
-    font-weight: 500;
-    text-transform: capitalize;
-    display: inline-block;
-    vertical-align: middle;
-    color: #fff;
+
+.sideBar {
     position: relative;
-    padding-left: 15px;
+    height: 100%;
+    width: 17vw;
+    padding: 1em;
 }
 
-.radio input[type="radio"] {
-    display: none;
+.bodyContainer {
+    display: flex;
+    width: 100%;
+    /* height: 50vw; */
 }
 
-.radio span {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 3px;
-}
-
-.radio span:after {
-    content: "";
-    height: 4px;
-    width: 4px;
-    display: block;
-    background: #fff;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    transition: 300ms ease-in-out 0s;
-}
-
-.radio input[type="radio"]:checked ~ span:after {
-    transform: translate(-50%, -50%) scale(1);
+.body {
+    width: 100%;
+    position: relative;
+    height: 100%;
 }
