@@ -23,7 +23,7 @@ function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(15);
 
-    let lastItemPerPage = currentPage * itemsPerPage; //2 * 15 --> 30
+    let lastItemPerPage = currentPage * itemsPerPage; //1 * 15 --> 15
     let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
     let currentPageItems = filteredVideogames?.slice(
         firstItemPerPage,
@@ -42,7 +42,7 @@ function Home() {
         if (e.target.value === "des") dispatch(lessRating(e.target.value));
 
         setCurrentPage(1);
-        setOrder(e.target.value);
+        // setOrder(e.target.value);
     };
 
     return (

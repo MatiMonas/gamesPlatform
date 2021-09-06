@@ -12,9 +12,9 @@ import {
     ORDER_DESC,
     ORDER_MORE_RATING,
     ORDER_LESS_RATING,
+    FILTER_GENRES,
 
     // FILTER_ORIGIN,
-    // FILTER_GENRES,
 } from "../actions/actionTypes";
 import { orderRating, orderAlph } from "../../Utils/orders";
 
@@ -58,6 +58,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return { ...state, newGame: payload };
 
         /*---------FILTERS---------*/
+        case FILTER_GENRES:
+            //necesito de los juegos que tengo en videogames, solo copiarme los juego que vengan con el value
+            //payload = ["1", "5" ,"6"]
+            let copyGames = [...state.videogames];
+
+            for (let i = 0; i < payload.length; i++) {
+                // console.log(payload);
+                copyGames = copyGames?.filter((el) => {
+                    let genreCheck = el.genres?.map((e) => e.name);
+                    console.log("SOY GENRE CHECK", genreCheck);
+                    return genreCheck?.includes(payload[i]);
+
+                    // return ;
+                });
+            }
+            return { ...state, filteredVideogames: [...copyGames] };
 
         /*---------ORDERS---------*/
         //This to functions resets to the original order

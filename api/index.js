@@ -32,7 +32,11 @@ conn.sync({ force: true })
             const URL = GENRES_URL;
             try {
                 const getGenres = await axios.get(URL);
-                const resultGenres = getGenres.data?.results;
+                const resultGenres = getGenres.data?.results.sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                });
 
                 resultGenres &&
                     resultGenres.map(async (genre) => {
