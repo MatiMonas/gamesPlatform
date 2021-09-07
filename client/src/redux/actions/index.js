@@ -15,15 +15,14 @@ import {
     GET_GENRES,
     POST_VIDEOGAME,
     CLEAR_GAME_DETAIL,
-    ORDER_ASC,
-    ORDER_DESC,
-    ORDER_MORE_RATING,
-    ORDER_LESS_RATING,
+    ORDER,
+    ORDER_RATING,
+    ORDER_NAMES,
+    ORDER_RATING_NAMES,
     NO_ORDER,
     NO_ORDER_SEARCH_GAMES,
     FILTER_GENRES,
-    // FILTER_ORIGIN,
-    // SHOW_GAMES,
+    FILTER_ORIGIN,
 } from "./actionTypes";
 
 export const getGames = () => {
@@ -83,6 +82,10 @@ export const filterByGenre = (payload) => {
     return { type: FILTER_GENRES, payload };
 };
 
+export const filterByOrigin = (payload) => {
+    return { type: FILTER_ORIGIN, payload };
+};
+
 /*----------------BY ORDER-----------------*/
 export function noOrder() {
     return { type: NO_ORDER };
@@ -91,34 +94,18 @@ export function noOrderSearchGames() {
     return { type: NO_ORDER_SEARCH_GAMES };
 }
 
-export function orderAz(payload) {
-    return { type: ORDER_ASC, payload };
-}
-export function orderZa(payload) {
-    return { type: ORDER_DESC, payload };
+export function order(payload) {
+    return { type: ORDER, payload };
 }
 
-export function moreRating(payload) {
-    return { type: ORDER_MORE_RATING, payload };
+export function orderRating(payload) {
+    return { type: ORDER_RATING, payload };
 }
-export function lessRating(payload) {
-    return { type: ORDER_LESS_RATING, payload };
+export function orderNames(payload) {
+    return { type: ORDER_NAMES, payload };
 }
-
-// export const orderZa = (array, order = "ZA") => {
-//     const result = orderAlphFunc(array, order);
-//     return { type: ORDER_DESC, payload: result };
-// };
-
-// export const mostPopular = (array, order = "asc") => {
-//     const result = orderRatingFunc(array, order);
-//     return { type: ORDER_ASC, payload: result };
-// };
-// export const lessPopular = (array, order = "des") => {
-//     const result = orderRatingFunc(array, order);
-//     return { type: ORDER_DESC, payload: result };
-// };
+export function orderRatingNames(payload) {
+    return { type: ORDER_RATING_NAMES, payload };
+}
 
 /*----------------BY ORIGIN----------------*/
-
-/*----------------BY GENRE----------------*/
