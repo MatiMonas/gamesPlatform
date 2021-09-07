@@ -8,17 +8,16 @@ import {
     CLEAR_GAME_DETAIL,
     NO_ORDER,
     NO_ORDER_SEARCH_GAMES,
-    ORDER_ASC,
-    ORDER_DESC,
-    ORDER_MORE_RATING,
-    ORDER_LESS_RATING,
+    ORDER,
+    ORDER_RATING,
+    ORDER_NAMES,
+    ORDER_RATING_NAMES,
     FILTER_GENRES,
-
-    // FILTER_ORIGIN,
+    FILTER_ORIGIN,
 } from "../actions/actionTypes";
 import { orderRating, orderAlph } from "../../Utils/orders";
 
-const initialState = {
+let initialState = {
     videogames: [],
     filteredVideogames: [],
     newGame: null,
@@ -64,16 +63,26 @@ export default function rootReducer(state = initialState, { type, payload }) {
             let copyGames = [...state.videogames];
 
             for (let i = 0; i < payload.length; i++) {
-                // console.log(payload);
                 copyGames = copyGames?.filter((el) => {
                     let genreCheck = el.genres?.map((e) => e.name);
-                    console.log("SOY GENRE CHECK", genreCheck);
                     return genreCheck?.includes(payload[i]);
-
-                    // return ;
                 });
             }
             return { ...state, filteredVideogames: [...copyGames] };
+
+        case FILTER_ORIGIN:
+            const videogames = state.filteredVideogames;
+            let filteredOrigin =
+                payload === "created"
+                    ? videogames.filter((el) => el.id.includes("-"))
+                    : videogames.filter((el) => !el.id.includes("-"));
+            return {
+                ...state,
+                filteredVideogames:
+                    payload === "All"
+                        ? state.filteredVideogames
+                        : filteredOrigin,
+            };
 
         /*---------ORDERS---------*/
         //This to functions resets to the original order
@@ -89,66 +98,24 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return { ...state, filtersByName: [...byNameCopy] };
 
         /*----------------------------------*/
-        case ORDER_ASC:
-            if (state.searchByName !== undefined) {
-                let nameCopy = [...state.searchByName];
-                let result = orderAlph(nameCopy, "AZ");
-                return { ...state, filtersByName: [...result] };
-            } else if (state.videogames) {
-                let copy = [...state.videogames];
-                let result = orderAlph(copy, "AZ");
-                return { ...state, filteredVideogames: [...result] };
-            }
-            return;
+        case ORDER:
+            let result = orderAlph(state.filteredVideogames, payload);
+            return { ...state, filteredVideogames: [...result] };
 
-        case ORDER_DESC:
-            if (state.searchByName !== undefined) {
-                let nameCopy = [...state.searchByName];
-                let result = orderAlph(nameCopy, "ZA");
-                return { ...state, filtersByName: [...result] };
-            } else if (state.videogames) {
-                let copy = [...state.videogames];
-                let result = orderAlph(copy, "ZA");
-                return { ...state, filteredVideogames: [...result] };
-            }
-            return;
+        case ORDER_RATING:
+            let result1 = orderRating(state.filteredVideogames, payload);
+            return { ...state, filteredVideogames: [...result1] };
 
-        case ORDER_MORE_RATING:
-            if (state.searchByName !== undefined) {
-                let nameCopy = [...state.searchByName];
-                let result = orderRating(nameCopy, "asc");
-                return { ...state, filtersByName: [...result] };
-            } else if (state.videogames) {
-                let copy = [...state.videogames];
-                let result = orderRating(copy, "asc");
-                return { ...state, filteredVideogames: [...result] };
-            }
-            return;
+        case ORDER_NAMES:
+            let namesResult = orderAlph(state.filtersByName, payload);
+            return { ...state, filtersByName: [...namesResult] };
 
-        case ORDER_LESS_RATING:
-            if (state.searchByName !== undefined) {
-                let nameCopy = [...state.searchByName];
-                let result = orderRating(nameCopy, "des");
-                return { ...state, filtersByName: [...result] };
-            } else if (state.videogames) {
-                let copy = [...state.videogames];
-                let result = orderRating(copy, "des");
-                return { ...state, filteredVideogames: [...result] };
-            }
-            return;
+        case ORDER_RATING_NAMES:
+            let namesResult1 = orderRating(state.filtersByName, payload);
+            return { ...state, filtersByName: [...namesResult1] };
+
         /*-------------------------*/
         default:
             return state;
     }
 }
-
-// copy.sort((a, b) => {
-//     if (a.name > b.name) {
-//         return 1;
-//     }
-//     if (a.name < b.name) {
-//         return -1;
-//     }
-//     return 0;
-// })
-// : state.videogames;
