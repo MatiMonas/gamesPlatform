@@ -107,6 +107,7 @@ function CreateGame() {
         dispatch(postGame(newGame));
         dispatch(getGames());
     }
+
     return (
         <>
             <NavBar />
