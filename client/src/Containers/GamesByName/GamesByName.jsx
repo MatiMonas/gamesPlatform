@@ -6,11 +6,9 @@ import NavBar from "../../Components/NavBar/NavBar";
 import SideBar from "../../Components/SideBar/SideBar";
 import {
     clearPage,
-    lessRating,
-    moreRating,
     noOrderSearchGames,
-    orderAz,
-    orderZa,
+    orderNames,
+    orderRatingNames,
     searchByName,
 } from "../../redux/actions";
 import style from "./GamesByName.module.css";
@@ -28,10 +26,12 @@ function GamesByName() {
 
     const handleOrder = (e) => {
         if (e.target.value === "All") dispatch(noOrderSearchGames());
-        if (e.target.value === "AZ") dispatch(orderAz(e.target.value));
-        if (e.target.value === "ZA") dispatch(orderZa(e.target.value));
-        if (e.target.value === "asc") dispatch(moreRating(e.target.value));
-        if (e.target.value === "des") dispatch(lessRating(e.target.value));
+        if (e.target.value === "AZ" || e.target.value === "ZA")
+            dispatch(orderNames(e.target.value));
+        if (e.target.value === "asc" || e.target.value === "des")
+            dispatch(orderRatingNames(e.target.value));
+
+        //
         setOrder(e.target.value);
     };
 
