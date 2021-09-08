@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 .radio {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
     text-transform: capitalize;
     display: inline-block;
@@ -33,7 +33,7 @@
     display: block;
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 6px;
 }
 
 .radio span:after {

@@ -3,10 +3,12 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     gap: 20px;
-    background-color: transparent;
-    max-width: 1500px;
+    /* background-color: red; */
+    max-width: 75%;
+
     margin: 0 auto;
     height: 100%;
+    /* padding: 2em; */
     position: relative;
     /* overflow-y: hidden; */
 }

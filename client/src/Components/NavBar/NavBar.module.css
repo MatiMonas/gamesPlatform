@@ -19,13 +19,11 @@
 .navbar {
     position: relative;
     width: 100%;
-    height: 100px;
 }
 
 .inputContainer {
     display: flex;
     justify-content: space-evenly;
-    padding-top: 1.5em;
 }
 
 /* form {

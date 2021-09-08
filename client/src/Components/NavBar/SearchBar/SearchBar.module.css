@@ -9,14 +9,19 @@
 .searchBar {
     width: 40vw;
     height: 40px;
-    border-radius: 50px 0px 0px 50px;
-    border: 1px solid;
-    border-right: none;
-    background-color: transparent;
+    border-radius: 50px 50px 50px 50px;
+    border: none;
+    background-color: RGB(59, 59, 59);
     padding: 1em;
+    transition: 0.25s;
+    color: white;
+    position: relative;
+    left: 0;
+}
 
-    /* position: absolute; */
-    /* transform: translate(-50%, -165%); */
+.searchBar:hover {
+    background-color: white;
+    color: RGB(59, 59, 59);
 }
 
 .label {
@@ -36,17 +41,24 @@ input:not(:placeholder-shown) + label {
 }
 
 .button {
-    position: relative;
+    position: absolute;
+    right: 0;
+    color: RGB(59, 59, 59);
     height: 40px;
     top: -1px;
     padding-right: 1em;
-    border: 1px solid;
-    border-left: none;
+    /* border: 1px solid; */
+    border: none;
     border-radius: 0 50px 50px 0px;
     background-color: transparent;
     font-family: "Poppins";
     /* position: absolute; */
     /* transform: translate(-50%, -165%); */
+}
+
+.button:hover {
+    cursor: pointer;
+    color: white;
 }
 
 .button:active,

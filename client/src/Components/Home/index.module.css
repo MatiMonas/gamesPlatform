@@ -1,0 +1,58 @@
+.mainContainer {
+    /* background-color: black; */
+    padding: 0.5em 1.5em 0em 1.5em;
+    height: 100%;
+    position: relative;
+}
+
+.navContainer {
+    display: flex;
+
+    align-content: flex-start;
+    justify-content: space-between;
+}
+
+.sideBar {
+    position: relative;
+    height: max-content;
+    width: 17vw;
+    padding: 0.5em;
+    margin-top: 2%;
+    /* background-color: green; */
+}
+
+h2 {
+    white-space: nowrap;
+}
+
+.bodyContainer {
+    display: flex;
+    width: 100%;
+    /* height: 50vw; */
+}
+
+.pages {
+    position: absolute;
+}
+
+.pages2 {
+    position: relative;
+}
+.body {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    margin-top: 2%;
+}
+
+.contentContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.contentContainer {
+    height: 850px;
+}
+
+.gameCardsContainer {
+    padding: 1em;
+}
