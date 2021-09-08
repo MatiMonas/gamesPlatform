@@ -8,7 +8,6 @@ import {
     clearPage,
     noOrderSearchGames,
     orderNames,
-    orderRatingNames,
     searchByName,
 } from "../../redux/actions";
 import style from "./GamesByName.module.css";
@@ -26,12 +25,14 @@ function GamesByName() {
 
     const handleOrder = (e) => {
         if (e.target.value === "All") dispatch(noOrderSearchGames());
-        if (e.target.value === "AZ" || e.target.value === "ZA")
+        if (
+            e.target.value === "AZ" ||
+            e.target.value === "ZA" ||
+            e.target.value === "asc" ||
+            e.target.value === "des"
+        )
             dispatch(orderNames(e.target.value));
-        if (e.target.value === "asc" || e.target.value === "des")
-            dispatch(orderRatingNames(e.target.value));
 
-        //
         setOrder(e.target.value);
     };
 
