@@ -1,29 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByGenre, noOrder } from "../../../../redux/actions";
+import {
+    filterByGenre,
+    filterByOrigin,
+    noOrder,
+    order,
+} from "../../../../redux/actions";
 import style from "./OrderAZInput.module.css";
 
-function Order({ handleOrder }) {
+function Order() {
     const dispatch = useDispatch();
-    // const videoGames = useSelector((state) => state.videogames);
     const genres = useSelector((state) => state.genres);
-    // let [videogames, setVideogames] = useState([]);
     let [checked, setChecked] = useState([]);
+    let [radius, setRadius] = useState("");
+    let [origin, setOrigin] = useState("");
 
     //MANDO LA ACTION CADA VEZ QUE CAMBIA EL ESTADO
     useEffect(() => {
         dispatch(noOrder());
+        dispatch(filterByOrigin(origin));
         dispatch(filterByGenre(checked));
-        // setVideogames(videoGames);
-    }, [dispatch, checked]);
+        dispatch(order(radius));
+    }, [dispatch, checked, radius, origin]);
 
-    //SETEO LOS CHECKED
+    //ORDENAMIENTOS
+    const handleOrder = (e) => {
+        // dispatch(noOrder());
+        // if (e.target.value === "All") dispatch(noOrder());
+        dispatch(order(e.target.value));
 
-    function handleClick(e) {
-        e.preventDefault();
-        dispatch(noOrder());
-    }
+        setRadius(e.target.value);
+    };
 
+    //FILTRO POR ORIGEN
+    const handleFilterOrigin = (e) => {
+        // dispatch(noOrder());
+        // dispatch(filterByOrigin(e.target.value));
+        setOrigin(e.target.value);
+    };
+
+    //ESCUCHA ESTADO DE CHECKBOX
     function handleChange(e) {
         const currentIndex = checked.indexOf(e.target.value);
         const newChecked = [...checked];
@@ -43,13 +59,15 @@ function Order({ handleOrder }) {
     return (
         <>
             <div className={style.mainContainer}>
-                <button onClick={handleClick} name="order" value="All">
-                    Reset
-                </button>
                 <div
                     className={style.radioGroup}
                     onChange={(e) => handleOrder(e)}
                 >
+                    <label className={style.radio}>
+                        <input type="radio" name="order" value="All" />
+                        Reset All Filters
+                        <span></span>
+                    </label>
                     <h2>Order and Rating</h2>
                     <label className={style.radio}>
                         <input type="radio" name="order" value="AZ" />
@@ -88,6 +106,29 @@ function Order({ handleOrder }) {
                             <span></span>
                         </label>
                     ))}
+                </div>
+            </div>
+            <div className={style.mainContainer}>
+                <div
+                    className={style.radioGroup}
+                    onChange={(e) => handleFilterOrigin(e)}
+                >
+                    <h2>Origin</h2>
+                    <label className={style.radio}>
+                        <input type="radio" default name="origin" value="All" />
+                        All
+                        <span></span>
+                    </label>
+                    <label className={style.radio}>
+                        <input type="radio" name="origin" value="created" />
+                        Created
+                        <span></span>
+                    </label>
+                    <label className={style.radio}>
+                        <input type="radio" name="origin" value="api" />
+                        Existant
+                        <span></span>
+                    </label>
                 </div>
             </div>
         </>

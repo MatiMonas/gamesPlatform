@@ -32,11 +32,11 @@ function SearchBar() {
                     id="search"
                     autoComplete="off"
                     value={state.search}
-                    placeholder="🔍"
+                    placeholder="Search games"
                 />
-                <label htmlFor="search" className={style.label}>
+                {/* <label htmlFor="search" className={style.label}>
                     Search Game
-                </label>
+                </label> */}
                 {!state.search ? (
                     <button className={style.button} type="submit" disabled>
                         Lets Play
