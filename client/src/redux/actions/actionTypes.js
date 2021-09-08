@@ -8,10 +8,7 @@ export const POST_VIDEOGAME = "POST_VIDEOGAME";
 export const CLEAR_GAME_DETAIL = "CLEAR_GAME_DETAIL";
 
 export const ORDER = "ORDER";
-export const ORDER_RATING = "ORDER_RATING";
-
 export const ORDER_NAMES = "ORDER_NAMES";
-export const ORDER_RATING_NAMES = "ORDER_RATING_NAMES";
 
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const FILTER_GENRES = "FILTER_GENRES";
