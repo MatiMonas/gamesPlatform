@@ -9,17 +9,15 @@ import {
     NO_ORDER,
     NO_ORDER_SEARCH_GAMES,
     ORDER,
-    ORDER_RATING,
     ORDER_NAMES,
-    ORDER_RATING_NAMES,
     FILTER_GENRES,
     FILTER_ORIGIN,
 } from "../actions/actionTypes";
-import { orderRating, orderAlph } from "../../Utils/orders";
+import { order } from "../../Utils/orders";
 
 let initialState = {
-    videogames: [],
-    filteredVideogames: [],
+    videogames: [], //nunca muta
+    filteredVideogames: [], //muta y renderizo
     newGame: null,
     genres: [],
     platforms: [],
@@ -60,29 +58,38 @@ export default function rootReducer(state = initialState, { type, payload }) {
         case FILTER_GENRES:
             //necesito de los juegos que tengo en videogames, solo copiarme los juego que vengan con el value
             //payload = ["1", "5" ,"6"]
-            let copyGames = [...state.videogames];
+            let copyGames = [...state.filteredVideogames];
 
             for (let i = 0; i < payload.length; i++) {
                 copyGames = copyGames?.filter((el) => {
-                    let genreCheck = el.genres?.map((e) => e.name);
+                    let genreCheck =
+                        el.genres?.map((e) => e.name) ||
+                        el.gameGenres?.map((e) => e.name);
                     return genreCheck?.includes(payload[i]);
                 });
             }
             return { ...state, filteredVideogames: [...copyGames] };
 
-        case FILTER_ORIGIN:
-            const videogames = state.filteredVideogames;
-            let filteredOrigin =
-                payload === "created"
-                    ? videogames.filter((el) => el.id.includes("-"))
-                    : videogames.filter((el) => !el.id.includes("-"));
-            return {
-                ...state,
-                filteredVideogames:
-                    payload === "All"
-                        ? state.filteredVideogames
-                        : filteredOrigin,
-            };
+        case FILTER_ORIGIN: // All , created, api (3 casos de payload)
+            const videogames = [...state.filteredVideogames];
+
+            if (payload === "All")
+                return { ...state, filteredVideogames: [...videogames] };
+
+            if (payload === "created") {
+                let filteredDBGames = videogames?.filter(
+                    (el) => typeof el.id === "string"
+                );
+                return { ...state, filteredVideogames: [...filteredDBGames] };
+            }
+
+            if (payload === "api") {
+                let filteredAPIGames = videogames?.filter(
+                    (el) => typeof el.id === "number"
+                );
+                return { ...state, filteredVideogames: [...filteredAPIGames] };
+            }
+            return { ...state, filteredVideogames: [...videogames] };
 
         /*---------ORDERS---------*/
         //This to functions resets to the original order
@@ -99,20 +106,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
 
         /*----------------------------------*/
         case ORDER:
-            let result = orderAlph(state.filteredVideogames, payload);
+            let result = order(state.filteredVideogames, payload);
             return { ...state, filteredVideogames: [...result] };
 
-        case ORDER_RATING:
-            let result1 = orderRating(state.filteredVideogames, payload);
-            return { ...state, filteredVideogames: [...result1] };
-
         case ORDER_NAMES:
-            let namesResult = orderAlph(state.filtersByName, payload);
+            let namesResult = order(state.filtersByName, payload);
             return { ...state, filtersByName: [...namesResult] };
-
-        case ORDER_RATING_NAMES:
-            let namesResult1 = orderRating(state.filtersByName, payload);
-            return { ...state, filtersByName: [...namesResult1] };
 
         /*-------------------------*/
         default:
