@@ -1,5 +1,4 @@
 import "./App.css";
-import Home from "./Containers/Home";
 import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import { useDispatch } from "react-redux";
@@ -9,6 +8,7 @@ import GamesByName from "./Containers/GamesByName/GamesByName";
 import GameDetails from "./Containers/GameDetails/GameDetails";
 import { Error404 } from "./Components/Error404/Error404";
 import CreateGame from "./Containers/CreateGame/CreateGame";
+import MainView from "./Containers/MainView/MainView";
 
 function App() {
     const dispatch = useDispatch();
@@ -23,8 +23,8 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Landing} />
 
-                <Route exact path="/home" component={Home} />
-                <Route path="/search/" exact component={Home}></Route>
+                <Route exact path="/home" component={MainView} />
+                <Route path="/search/" exact component={MainView}></Route>
                 <Route
                     path="/search/:name"
                     exact
