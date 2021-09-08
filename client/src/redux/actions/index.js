@@ -16,9 +16,7 @@ import {
     POST_VIDEOGAME,
     CLEAR_GAME_DETAIL,
     ORDER,
-    ORDER_RATING,
     ORDER_NAMES,
-    ORDER_RATING_NAMES,
     NO_ORDER,
     NO_ORDER_SEARCH_GAMES,
     FILTER_GENRES,
@@ -87,8 +85,8 @@ export const filterByOrigin = (payload) => {
 };
 
 /*----------------BY ORDER-----------------*/
-export function noOrder() {
-    return { type: NO_ORDER };
+export function noOrder(payload) {
+    return { type: NO_ORDER, payload };
 }
 export function noOrderSearchGames() {
     return { type: NO_ORDER_SEARCH_GAMES };
@@ -98,14 +96,8 @@ export function order(payload) {
     return { type: ORDER, payload };
 }
 
-export function orderRating(payload) {
-    return { type: ORDER_RATING, payload };
-}
 export function orderNames(payload) {
     return { type: ORDER_NAMES, payload };
-}
-export function orderRatingNames(payload) {
-    return { type: ORDER_RATING_NAMES, payload };
 }
 
 /*----------------BY ORIGIN----------------*/
