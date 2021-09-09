@@ -109,6 +109,29 @@ export default function rootReducer(state = initialState, { type, payload }) {
             //     return { ...state, filtersByName: [...videogamesByNames] };
             // }
 
+            if (state.searchByName !== undefined) {
+                const videogamesByNames = [...state.filtersByName];
+                if (payload === "All") {
+                    console.log("entre");
+                    return { ...state, filtersByName: [...videogamesByNames] };
+                }
+
+                if (payload === "created") {
+                    let filteredDbGames = videogamesByNames?.filter(
+                        (el) => typeof el.id === "string"
+                    );
+                    return { ...state, filtersByName: [...filteredDbGames] };
+                }
+
+                if (payload === "api") {
+                    let filteredAPIGames = videogamesByNames?.filter(
+                        (el) => typeof el.id === "number"
+                    );
+                    return { ...state, filtersByName: [...filteredAPIGames] };
+                }
+                return { ...state, filtersByName: [...videogamesByNames] };
+            }
+
             const videogames = [...state.filteredVideogames];
             if (payload === "All") {
                 return { ...state, filteredVideogames: [...videogames] };
