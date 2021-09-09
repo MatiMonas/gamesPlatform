@@ -16,7 +16,6 @@ import {
     POST_VIDEOGAME,
     CLEAR_GAME_DETAIL,
     ORDER,
-    ORDER_NAMES,
     NO_ORDER,
     NO_ORDER_SEARCH_GAMES,
     FILTER_GENRES,
@@ -94,10 +93,6 @@ export function noOrderSearchGames() {
 
 export function order(payload) {
     return { type: ORDER, payload };
-}
-
-export function orderNames(payload) {
-    return { type: ORDER_NAMES, payload };
 }
 
 /*----------------BY ORIGIN----------------*/

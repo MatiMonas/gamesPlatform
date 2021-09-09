@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NavBar from "../../Components/NavBar/NavBar";
 import style from "./CreateGame.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom";
-import { GENRES_URL } from "../../constants";
 import { PLATFORMS_URL } from "../../constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
 import starRating from "../../Utils/Functions/starRating";
 import Logo from "../../Components/Logo";
@@ -29,10 +27,11 @@ function CreateGame() {
         background_image_error: "",
     });
 
-    const [genres, setGenres] = useState([]);
     const [platforms, setPlatforms] = useState([]);
     const [stars, setStars] = useState([]);
     const [button, setButton] = useState(true);
+
+    const genres = useSelector((state) => state.genres);
 
     /*----------------USE EFFECTS---------------*/
 
@@ -40,15 +39,6 @@ function CreateGame() {
     useEffect(() => setStars(starRating(videogame.rating)), [videogame.rating]);
 
     useEffect(() => {
-        axios
-            .get(GENRES_URL)
-            .then((response) => {
-                setGenres(response.data);
-            })
-            .catch((err) => {
-                throw new Error(err);
-            });
-
         axios
             .get(PLATFORMS_URL)
             .then((response) => {
