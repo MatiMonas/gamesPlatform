@@ -5,7 +5,7 @@ import style from "./index.module.css";
 function Logo() {
     return (
         <Link to="/home">
-            <h1 className={style.logo}>LOGO</h1>
+            <h1 className={style.logo}>OG</h1>
         </Link>
     );
 }

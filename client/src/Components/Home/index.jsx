@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { filterByOrigin, noOrder, order } from "../../redux/actions";
+import { useSelector } from "react-redux";
 import GameCards from "../GameCards/GameCards";
 import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar";
@@ -10,16 +8,13 @@ import style from "./index.module.css";
 import CustomScrollDiv from "../CustomScrollDiv/CustomScrollDiv";
 
 function Home() {
-    const dispatch = useDispatch();
     const filteredVideogames = useSelector((state) => state.filteredVideogames);
-    const [, setOrder] = useState("");
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(15);
-    let [radius, setRadius] = useState("");
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [filteredVideogames]);
+    const [pagesNumberLimit] = useState(5);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+    const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
     let lastItemPerPage = currentPage * itemsPerPage; //1 * 15 --> 15
     let firstItemPerPage = lastItemPerPage - itemsPerPage; //30 - 15 --> 15
@@ -27,6 +22,10 @@ function Home() {
         firstItemPerPage,
         lastItemPerPage
     );
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filteredVideogames]);
 
     function pagination(e, num) {
         e.preventDefault();
@@ -38,12 +37,6 @@ function Home() {
             <div className={style.mainContainer}>
                 <div className={style.navContainer}>
                     <NavBar />
-
-                    <div>
-                        <Link to="/create_videogame">
-                            <h2 classname={style.h2}>Agregar videojuego</h2>
-                        </Link>
-                    </div>
                 </div>
                 <div className={style.bodyContainer}>
                     <div className={style.sideBar}>
@@ -51,6 +44,20 @@ function Home() {
                     </div>
 
                     <div className={style.body}>
+                        <div className={style.painationContainer}>
+                            <Pagination
+                                itemsPerPage={itemsPerPage}
+                                totalGames={filteredVideogames?.length}
+                                pagination={pagination}
+                                setCurrentPage={setCurrentPage}
+                                currentPage={currentPage}
+                                pagesNumberLimit={pagesNumberLimit}
+                                maxPageNumberLimit={maxPageNumberLimit}
+                                setMaxPageNumberLimit={setMaxPageNumberLimit}
+                                minPageNumberLimit={minPageNumberLimit}
+                                setMinPageNumberLimit={setMinPageNumberLimit}
+                            />
+                        </div>
                         <CustomScrollDiv>
                             {!filteredVideogames.length ? (
                                 <div className={style.contentContainer}>
@@ -58,15 +65,6 @@ function Home() {
                                 </div>
                             ) : (
                                 <div className={style.contentContainer}>
-                                    <div className={style.painationContainer}>
-                                        <Pagination
-                                            itemsPerPage={itemsPerPage}
-                                            totalGames={
-                                                filteredVideogames?.length
-                                            }
-                                            pagination={pagination}
-                                        />
-                                    </div>
                                     <div className={style.gameCardsContainer}>
                                         <GameCards games={currentPageItems} />
                                     </div>

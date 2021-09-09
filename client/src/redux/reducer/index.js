@@ -43,7 +43,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return { ...state, platforms: payload };
 
         case SEARCH_BY_NAME:
-            return { ...state, searchByName: payload, filtersByName: payload };
+            return {
+                ...state,
+                filteredVideogames: payload,
+                filtersByName: payload,
+            };
 
         case SEARCH_BY_ID:
             return { ...state, searchById: payload };

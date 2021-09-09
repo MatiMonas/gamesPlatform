@@ -23,7 +23,7 @@ function SearchBar() {
     }
     return (
         <div className={style.container}>
-            <form>
+            <form style={{ width: "50vw" }}>
                 <input
                     className={style.searchBar}
                     type="text"

@@ -1,10 +1,16 @@
 .pag {
     display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    /* border: 1px red solid; */
-    top: -30px;
-    position: absolute;
+    position: relative;
+    /* top: -30px; */
+}
+.liContainer {
+    display: flex;
+    position: relative;
+    align-content: center;
+    justify-content: space-between;
+    width: 25%;
 }
 
 .pag button {
@@ -12,9 +18,22 @@
     background-color: transparent;
     font-weight: 600;
     font-size: 1.2rem;
-    letter-spacing: 10px;
+    /* letter-spacing: 5px; */
 }
 
 .pag button:hover {
     cursor: pointer;
+}
+
+.active {
+    color: rgb(255, 0, 64);
+}
+
+.display {
+    visibility: hidden;
+    /* display: none; */
+}
+
+.li {
+    margin: 0;
 }

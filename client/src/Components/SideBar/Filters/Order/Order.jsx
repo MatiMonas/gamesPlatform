@@ -7,13 +7,27 @@ import {
     order,
 } from "../../../../redux/actions";
 import style from "./OrderAZInput.module.css";
+import { BiReset } from "react-icons/bi";
+import { MdExpandMore, MdExpandLess } from "react-icons/md";
+import {
+    FaSortAlphaDown,
+    FaSortNumericUp,
+    FaSortAlphaUp,
+    FaSortNumericDown,
+} from "react-icons/fa";
 
-function Order() {
+function Order({ payload }) {
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genres);
-    let [checked, setChecked] = useState([]);
     let [radius, setRadius] = useState("");
+    let [checked, setChecked] = useState([]);
     let [origin, setOrigin] = useState("");
+    let [showResults, setShowResults] = useState(false);
+
+    const handleResults = () => {
+        if (showResults) return setShowResults(false);
+        return setShowResults(true);
+    };
 
     //MANDO LA ACTION CADA VEZ QUE CAMBIA EL ESTADO
     useEffect(() => {
@@ -21,21 +35,15 @@ function Order() {
         dispatch(filterByOrigin(origin));
         dispatch(filterByGenre(checked));
         dispatch(order(radius));
-    }, [dispatch, checked, radius, origin]);
+    }, [dispatch, checked, radius, origin, payload]);
 
     //ORDENAMIENTOS
     const handleOrder = (e) => {
-        // dispatch(noOrder());
-        // if (e.target.value === "All") dispatch(noOrder());
-        dispatch(order(e.target.value));
-
         setRadius(e.target.value);
     };
 
     //FILTRO POR ORIGEN
     const handleFilterOrigin = (e) => {
-        // dispatch(noOrder());
-        // dispatch(filterByOrigin(e.target.value));
         setOrigin(e.target.value);
     };
 
@@ -59,41 +67,66 @@ function Order() {
     return (
         <>
             <div className={style.mainContainer}>
-                <div
-                    className={style.radioGroup}
-                    onChange={(e) => handleOrder(e)}
-                >
-                    <label className={style.radio}>
-                        <input type="radio" name="order" value="All" />
-                        Reset All Filters
-                        <span></span>
-                    </label>
-                    <h2>Order and Rating</h2>
-                    <label className={style.radio}>
-                        <input type="radio" name="order" value="AZ" />
-                        Order AZ
-                        <span></span>
-                    </label>
-                    <label className={style.radio}>
-                        <input type="radio" name="order" value="ZA" />
-                        Order ZA
-                        <span></span>
-                    </label>
-                    <label className={style.radio}>
-                        <input type="radio" name="order" value="asc" />
-                        Most Popular
-                        <span></span>
-                    </label>
-                    <label className={style.radio}>
-                        <input type="radio" name="order" value="des" />
-                        Less Popular
-                        <span></span>
-                    </label>
+                <div className={style.orderGroup}>
+                    <h2 className={style.title}>Order and Rating</h2>
+                    <button
+                        name="order"
+                        value="AZ"
+                        onClick={(e) => handleOrder(e)}
+                    >
+                        <FaSortAlphaDown className={style.biSort} />
+                    </button>
+                    <button
+                        name="order"
+                        value="ZA"
+                        onClick={(e) => handleOrder(e)}
+                    >
+                        <FaSortAlphaUp className={style.biSort} />
+                    </button>
+                    <button
+                        name="order"
+                        value="asc"
+                        onClick={(e) => handleOrder(e)}
+                    >
+                        <FaSortNumericUp className={style.biSort} />
+                    </button>
+                    <button
+                        name="order"
+                        value="des"
+                        onClick={(e) => handleOrder(e)}
+                    >
+                        <FaSortNumericDown className={style.biSort} />
+                    </button>
+                    <button
+                        name="order"
+                        value="All"
+                        onClick={(e) => handleOrder(e)}
+                    >
+                        <BiReset className={style.biSort} />
+                    </button>
                 </div>
             </div>
             <div className={style.mainContainer}>
-                <h2>Genres</h2>
-                <div className={style.radioGroup} onChange={handleChange}>
+                <div className={style.displayContainer}>
+                    <div>
+                        <h2 className={style.title}>Genres</h2>
+                    </div>
+                    <div>
+                        <button onClick={handleResults}>
+                            {showResults === false ? (
+                                <MdExpandMore className={style.biSort} />
+                            ) : (
+                                <MdExpandLess className={style.biSort} />
+                            )}
+                        </button>
+                    </div>
+                </div>
+                <div
+                    className={`${style.radioGroup} ${
+                        showResults === true ? "" : style.display
+                    }`}
+                    onChange={handleChange}
+                >
                     {genres?.map((el) => (
                         <label key={el.id} className={style.radio}>
                             <input
@@ -113,7 +146,7 @@ function Order() {
                     className={style.radioGroup}
                     onChange={(e) => handleFilterOrigin(e)}
                 >
-                    <h2>Origin</h2>
+                    <h2 className={style.title}>Origin</h2>
                     <label className={style.radio}>
                         <input type="radio" default name="origin" value="All" />
                         All

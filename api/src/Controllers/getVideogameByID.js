@@ -35,6 +35,7 @@ const getGameByID = async (req, res, next) => {
                 background_image: gameData.background_image,
                 rating: gameData.rating,
                 description: gameData.description,
+                releaseDate: gameData.released,
                 platforms: gameData.platforms.map((disp) => disp.platform.name),
                 genres: gameData.genres.map((genre) => {
                     return {

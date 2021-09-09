@@ -15,9 +15,9 @@
 .sideBar {
     position: relative;
     height: max-content;
-    width: 17vw;
+    width: 15vw;
     padding: 0.5em;
-    margin-top: 2%;
+    /* margin-top: 3%; */
     /* background-color: green; */
 }
 
@@ -29,15 +29,10 @@ h2 {
     display: flex;
     width: 100%;
     /* height: 50vw; */
+
+    /* margin-top: 1%; */
 }
 
-.pages {
-    position: absolute;
-}
-
-.pages2 {
-    position: relative;
-}
 .body {
     width: 100%;
     position: relative;
@@ -50,9 +45,14 @@ h2 {
 }
 
 .contentContainer {
-    height: 850px;
+    height: 40vw;
+    position: relative;
 }
 
 .gameCardsContainer {
-    padding: 1em;
+    padding: 0em 1em 1em 1em;
+}
+
+.painationContainer {
+    padding: 0.5em;
 }
