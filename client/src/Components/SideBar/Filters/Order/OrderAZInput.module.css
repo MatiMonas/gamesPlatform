@@ -53,6 +53,21 @@
 .radio input[type="radio"]:checked ~ span:after {
     transform: translate(-50%, -50%) scale(1);
 }
-/* .radio input[type="checkbox"]:checked ~ span:after {
+.radio input[type="checkbox"]:checked ~ span:after {
     transform: translate(-50%, -50%) scale(1);
-} */
+}
+
+.biSort {
+    background-color: transparent;
+    height: 25px;
+    width: 25px;
+
+    pointer-events: none;
+}
+
+button {
+    padding: 1em;
+    padding-left: 0;
+    background-color: transparent;
+    border: none;
+}
