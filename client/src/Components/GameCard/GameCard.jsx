@@ -21,7 +21,7 @@ function GameCard(props) {
 
                         <div className={style.genresList}>
                             <div>
-                                <h5>Genres:</h5>
+                                <h5>Genres</h5>
                             </div>
                             <div className={style.propsContainer}>
                                 <ul className={style.gameGenres}>

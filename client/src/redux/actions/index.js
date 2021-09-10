@@ -17,7 +17,6 @@ import {
     CLEAR_GAME_DETAIL,
     ORDER,
     NO_ORDER,
-    NO_ORDER_SEARCH_GAMES,
     FILTER_GENRES,
     FILTER_ORIGIN,
 } from "./actionTypes";
@@ -86,9 +85,6 @@ export const filterByOrigin = (payload) => {
 /*----------------BY ORDER-----------------*/
 export function noOrder(payload) {
     return { type: NO_ORDER, payload };
-}
-export function noOrderSearchGames() {
-    return { type: NO_ORDER_SEARCH_GAMES };
 }
 
 export function order(payload) {

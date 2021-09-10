@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import style from "./Pagination.module.css";
 
 export default function Pagination({
@@ -16,6 +17,7 @@ export default function Pagination({
     /*----------------PAGINACION---------------*/
     const pages = []; // 120         15
     const numOfPages = Math.ceil(totalGames / itemsPerPage); // 8
+    const videogames = useSelector((state) => state.filteredVideogames);
 
     for (let i = 1; i <= numOfPages; i++) {
         pages.push(i);
@@ -39,8 +41,8 @@ export default function Pagination({
     const renderPage = pages.map((num) => {
         if (num < maxPageNumberLimit + 1 && num > minPageNumberLimit) {
             return (
-                <li className={style.li}>
-                    <div key={num} className={style.item}>
+                <li key={num} className={style.li}>
+                    <div className={style.item}>
                         <button
                             onClick={(e) => pagination(e, num)}
                             className={currentPage === num ? style.active : ""}
@@ -62,10 +64,14 @@ export default function Pagination({
                         onClick={handlePrevClick}
                         disabled={currentPage === pages[0] ? true : false}
                         className={
-                            currentPage === pages[0] ? style.display : ""
+                            currentPage === pages[0]
+                                ? style.display
+                                : "" || !videogames?.length
+                                ? style.display
+                                : ""
                         }
                     >
-                        Prev
+                        ⫷
                     </button>
                 </div>
                 <ul>{renderPage}</ul>
@@ -80,10 +86,12 @@ export default function Pagination({
                         className={
                             currentPage === pages[pages.length - 1]
                                 ? style.display
+                                : "" || !videogames?.length
+                                ? style.display
                                 : ""
                         }
                     >
-                        Next
+                        ⫸
                     </button>
                 </div>
             </div>

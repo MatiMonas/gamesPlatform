@@ -6,9 +6,11 @@ import NavBar from "../NavBar/NavBar";
 import SideBar from "../SideBar/SideBar";
 import style from "./index.module.css";
 import CustomScrollDiv from "../CustomScrollDiv/CustomScrollDiv";
+import Loading from "../Loading/Loading";
 
 function Home() {
     const filteredVideogames = useSelector((state) => state.filteredVideogames);
+    const games = useSelector((state) => state.videogames);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(15);
@@ -58,19 +60,23 @@ function Home() {
                                 setMinPageNumberLimit={setMinPageNumberLimit}
                             />
                         </div>
-                        <CustomScrollDiv>
-                            {!filteredVideogames.length ? (
-                                <div className={style.contentContainer}>
-                                    <h1>Cargando...</h1>
-                                </div>
-                            ) : (
+                        {!games.length ? (
+                            <div className={style.contentContainer}>
+                                <Loading />
+                            </div>
+                        ) : !filteredVideogames.length ? (
+                            <div className={style.contentContainer}>
+                                <h1>No games found with that</h1>
+                            </div>
+                        ) : (
+                            <CustomScrollDiv>
                                 <div className={style.contentContainer}>
                                     <div className={style.gameCardsContainer}>
                                         <GameCards games={currentPageItems} />
                                     </div>
                                 </div>
-                            )}
-                        </CustomScrollDiv>
+                            </CustomScrollDiv>
+                        )}
                     </div>
                 </div>
             </div>

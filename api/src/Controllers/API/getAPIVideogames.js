@@ -1,13 +1,9 @@
 const axios = require("axios");
 const { GAMES_URL } = require("../../utils/constants");
 
-const getAPIVideogames = async (req, res, next) => {
+const getAPIVideogames = async () => {
     let APIGames = [];
     let URL = GAMES_URL;
-
-    /* 
-    SE PODRIA OPTIMIZAR UTILIZANDO PROMISE RESOLVE CON CADA PAGINA PARA EVITAR TANTO TIEMPO DE CARGA POR LOS BUCLES    
-    */
 
     try {
         let page1 = (await axios.get(`${URL}&page_size=40`)).data;
@@ -38,7 +34,7 @@ const getAPIVideogames = async (req, res, next) => {
                         return gameData;
                     }
                 );
-                // console.log(APIGames);
+
                 return APIGames;
             })
             .then((resolve) => {

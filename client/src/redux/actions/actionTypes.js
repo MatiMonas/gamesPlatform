@@ -12,4 +12,3 @@ export const ORDER = "ORDER";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const FILTER_GENRES = "FILTER_GENRES";
 export const NO_ORDER = "NO_ORDER";
-export const NO_ORDER_SEARCH_GAMES = "NO_ORDER_SEARCH_GAMES";

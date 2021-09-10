@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { searchById } from "../../redux/actions";
+import Loading from "../Loading/Loading";
+import style from "./VideoGameDetail.module.css";
+import { TiStar } from "react-icons/ti";
 
 function VideogameDetail() {
     const videoGameDetail = useSelector((state) => state.searchById);
@@ -15,51 +18,72 @@ function VideogameDetail() {
 
     return (
         <>
-            {videoGameDetail?.msg ? (
-                <h1>{videoGameDetail.msg}</h1>
+            {!videoGameDetail?.length ? (
+                <div className={style.loading}>
+                    <Loading />
+                </div>
             ) : videoGameDetail ? (
-                <>
-                    <div>
-                        <div>
-                            <div>
-                                <h1>Title</h1> {videoGameDetail.name}
+                <div className={style.mainContainer}>
+                    <div className={style.bkImgContainer}>
+                        <img
+                            className={style.bkimg}
+                            src={videoGameDetail[0].background_image}
+                            alt=""
+                        />
+                    </div>
+                    <div className={style.infoContainer}>
+                        <div className={style.textContainer}>
+                            <div className={style.titleContainer}>
+                                <h1>{videoGameDetail[0].name}</h1>
+                                <h4 style={{ display: "flex", gap: "5px" }}>
+                                    {videoGameDetail[0].rating}
+                                    <TiStar className={style.star} />
+                                </h4>
                             </div>
                             <div>
-                                {" "}
-                                <img
-                                    src={videoGameDetail.background_image}
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <h4>Rating</h4>
-                                {videoGameDetail.rating}
-                            </div>
-                            <div>
-                                <p>Description:</p>
+                                <h3>Description:</h3>
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: videoGameDetail.description,
+                                        __html: videoGameDetail[0].description,
                                     }}
                                 ></div>
                             </div>
-                            <p>Release date:{videoGameDetail.releaseDate} </p>
-                            <p>
-                                Genres:
-                                {videoGameDetail.genres
-                                    ?.map((el) => el?.name)
-                                    .join(", ")}
-                            </p>
-                            <p>
-                                {videoGameDetail.platforms
-                                    ?.map((el) => el)
-                                    .join(", ")}
-                            </p>
+                            <div>
+                                <h4>Release date</h4>
+                                <p>{videoGameDetail[0].releaseDate} </p>
+                            </div>
+
+                            <div>
+                                <h4>Genres</h4>
+                                <p>
+                                    {videoGameDetail[0].genres
+                                        ?.map((el) => el?.name)
+                                        .join(", ")}
+                                    .
+                                </p>
+                            </div>
+                            <div>
+                                <h4>Platforms</h4>
+                                <p>
+                                    {videoGameDetail[0].platforms
+                                        ?.map((el) => el)
+                                        .join(", ")}
+                                    .
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className={style.imgContainer}>
+                            <img
+                                className={style.img}
+                                src={videoGameDetail[0].background_image}
+                                alt=""
+                            />
                         </div>
                     </div>
-                </>
+                </div>
             ) : (
-                <h1>Cargando...</h1>
+                <Loading />
             )}
         </>
     );

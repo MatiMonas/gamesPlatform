@@ -62,7 +62,6 @@ export default function CustomScrollDiv({ children, className, ...restProps }) {
         e.stopPropagation();
         setScrollThumbPosition(e.clientY);
         setDragging(true);
-        console.log("handleScrollThumbMouseDown");
     }, []);
 
     const handleScroll = useCallback(() => {

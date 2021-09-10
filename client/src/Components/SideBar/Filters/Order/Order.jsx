@@ -24,10 +24,15 @@ function Order({ payload }) {
     let [checked, setChecked] = useState([]);
     let [origin, setOrigin] = useState("");
     let [showResults, setShowResults] = useState(false);
+    let [showOrigin, setShowOrigin] = useState(false);
 
     const handleResults = () => {
         if (showResults) return setShowResults(false);
         return setShowResults(true);
+    };
+    const handleOriginDisplay = () => {
+        if (showOrigin) return setShowOrigin(false);
+        return setShowOrigin(true);
     };
 
     //MANDO LA ACTION CADA VEZ QUE CAMBIA EL ESTADO
@@ -142,12 +147,29 @@ function Order({ payload }) {
                     ))}
                 </div>
             </div>
+
             <div className={style.mainContainer}>
+                <div className={style.displayContainer}>
+                    <div>
+                        <h2 className={style.title}>Origin</h2>
+                    </div>
+
+                    <div>
+                        <button onClick={handleOriginDisplay}>
+                            {showOrigin === false ? (
+                                <MdExpandMore className={style.biSort} />
+                            ) : (
+                                <MdExpandLess className={style.biSort} />
+                            )}
+                        </button>
+                    </div>
+                </div>
                 <div
-                    className={style.radioGroup}
+                    className={`${style.radioGroup} ${
+                        showOrigin === true ? "" : style.display
+                    }`}
                     onChange={(e) => handleFilterOrigin(e)}
                 >
-                    <h2 className={style.title}>Origin</h2>
                     <label className={style.radio}>
                         <input type="radio" default name="origin" value="All" />
                         All

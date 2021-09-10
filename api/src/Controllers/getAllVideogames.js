@@ -16,7 +16,9 @@ const getAllVideogames = async (req, res, next) => {
         try {
             dataBaseGames = await Videogame.findAll(
                 {
-                    where: { name: { [Op.like]: `%${name}%` } },
+                    where: {
+                        name: { [Op.like]: `%${name.toLowerCase()}%` },
+                    },
                     include: GameGenre,
                 },
                 { include: Platform }
