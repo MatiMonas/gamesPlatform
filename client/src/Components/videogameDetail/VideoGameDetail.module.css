@@ -1,0 +1,70 @@
+.loading {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.mainContainer {
+    position: relative;
+    height: 90%;
+    /* background: red; */
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.bkImgContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.bkimg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    backdrop-filter: blur(2px);
+    filter: blur(8px);
+    -webkit-filter: blur(3px);
+    /* max-width: 100vw; */
+}
+
+.infoContainer {
+    display: flex;
+    position: absolute;
+    /* background: green; */
+    width: 80%;
+    height: 80%;
+    background-color: #000000ef;
+}
+
+.textContainer {
+    display: flex;
+    position: relative;
+    width: 60%;
+    padding: 1.5em;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.imgContainer {
+    position: relative;
+    /* background: blue; */
+
+    width: 50%;
+    height: 100%;
+}
+
+.img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 1em;
+}

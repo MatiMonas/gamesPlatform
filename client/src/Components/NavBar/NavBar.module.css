@@ -28,15 +28,6 @@
     align-content: stretch;
 }
 
-/* form {
-    position: relative;
-    width: 50vw;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-} */
-
 .searchBar {
     width: 50vw;
     height: 40px;
