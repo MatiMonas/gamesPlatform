@@ -63,7 +63,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100%;
+    min-height: 90%;
     background: transparent;
     animation: animateBg 10s linear infinite;
 }

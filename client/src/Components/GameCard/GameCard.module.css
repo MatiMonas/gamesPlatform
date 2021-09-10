@@ -4,7 +4,8 @@ a {
 .cardContainer {
     position: relative;
     height: 380px;
-    width: 330px;
+    padding: 0em 1em;
+    width: 375px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +16,12 @@ a {
     background: #0f0f0f;
     box-shadow: 0 5px 3px rgb(0 0 0 / 10%);
     flex-wrap: nowrap;
+    transition: 0.25s;
     /* animation: transitionIn 1.25s forwards; */
+}
+
+.cardContainer:hover {
+    box-shadow: 0px 5px 15px -8px rgb(151, 151, 151);
 }
 
 /* @keyframes transitionIn {
