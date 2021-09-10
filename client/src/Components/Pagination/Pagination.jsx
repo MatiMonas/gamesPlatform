@@ -45,7 +45,9 @@ export default function Pagination({
                     <div className={style.item}>
                         <button
                             onClick={(e) => pagination(e, num)}
-                            className={currentPage === num ? style.active : ""}
+                            className={`${
+                                currentPage === num ? style.active : ""
+                            } ${style.button1}`}
                         >
                             {num}
                         </button>
@@ -63,13 +65,13 @@ export default function Pagination({
                     <button
                         onClick={handlePrevClick}
                         disabled={currentPage === pages[0] ? true : false}
-                        className={
+                        className={`${
                             currentPage === pages[0]
                                 ? style.display
                                 : "" || !videogames?.length
                                 ? style.display
                                 : ""
-                        }
+                        } ${style.button2} `}
                     >
                         ⫷
                     </button>
@@ -83,13 +85,13 @@ export default function Pagination({
                                 ? true
                                 : false
                         }
-                        className={
+                        className={` ${
                             currentPage === pages[pages.length - 1]
                                 ? style.display
                                 : "" || !videogames?.length
                                 ? style.display
                                 : ""
-                        }
+                        } ${style.button2}`}
                     >
                         ⫸
                     </button>

@@ -21,12 +21,20 @@
     /* letter-spacing: 5px; */
 }
 
+.button2:hover {
+    color: rgb(255, 0, 64);
+}
+
 .pag button:hover {
     cursor: pointer;
 }
 
 .active {
     color: rgb(255, 0, 64);
+}
+
+.button1:hover {
+    color: rgba(255, 0, 64, 0.459);
 }
 
 .display {
