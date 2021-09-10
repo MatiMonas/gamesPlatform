@@ -41,7 +41,7 @@ function Order({ payload }) {
         dispatch(filterByOrigin(origin));
         dispatch(filterByGenre(checked));
         dispatch(order(radius));
-    }, [dispatch, checked, radius, origin, payload]);
+    }, [dispatch, checked, radius, origin]);
 
     //ORDENAMIENTOS
     const handleOrder = (e) => {
