@@ -66,7 +66,7 @@ function Home() {
                             </div>
                         ) : !filteredVideogames.length ? (
                             <div className={style.contentContainer}>
-                                <h1>No games found with that</h1>
+                                <h1>No games found with that combination</h1>
                             </div>
                         ) : (
                             <CustomScrollDiv>
