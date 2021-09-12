@@ -44,9 +44,6 @@
     height: 100%;
 }
 
-.textContainer {
-}
-
 .title {
     font-family: "Orbitron", sans-serif;
     font-size: clamp(10rem, 2.5vw, 15rem);

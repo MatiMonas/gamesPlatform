@@ -58,7 +58,10 @@ function VideogameDetail() {
                                 <p>
                                     {videoGameDetail[0].genres
                                         ?.map((el) => el?.name)
-                                        .join(", ")}
+                                        .join(", ") ||
+                                        videoGameDetail[0].gameGenres
+                                            ?.map((el) => el?.name)
+                                            .join(", ")}
                                     .
                                 </p>
                             </div>

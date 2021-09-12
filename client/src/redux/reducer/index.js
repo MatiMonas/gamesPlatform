@@ -55,8 +55,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
         /*---------FILTERS---------*/
         case FILTER_GENRES:
             //necesito de los juegos que tengo en videogames, solo copiarme los juego que vengan con el value
-            //payload = ["1", "5" ,"6"]
-
+            //payload = ["Action", "Adventure" ,"Rpg"]
+            //              i
             if (state.searchByName !== undefined) {
                 let copyGameNames = [...state.filtersByName];
                 for (let i = 0; i < payload.length; i++) {
@@ -69,12 +69,15 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 }
                 return { ...state, filtersByName: [...copyGameNames] };
             }
+
             let copyGames = [...state.filteredVideogames];
+
             for (let i = 0; i < payload.length; i++) {
                 copyGames = copyGames?.filter((el) => {
                     let genreCheck =
                         el.genres?.map((e) => e.name) ||
                         el.gameGenres?.map((e) => e.name);
+
                     return genreCheck?.includes(payload[i]);
                 });
             }
