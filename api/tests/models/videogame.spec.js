@@ -1,5 +1,5 @@
-const { Videogame, conn } = require("../../src/db.js");
-const { expect, assert } = require("chai");
+const { Videogame, conn, Platform, GameGenre } = require("../../src/db.js");
+const { expect } = require("chai");
 const app = require("../../src/app.js");
 const session = require("supertest-session");
 
@@ -53,6 +53,39 @@ describe("Platform model", () => {
                     id: 1,
                 }).then((platform) => {
                     expect(platform.name).to.equal("Super Mario Bros");
+                });
+            });
+        });
+    });
+});
+
+describe("Genre model", () => {
+    before(() =>
+        conn.authenticate().catch((err) => {
+            console.error("Unable to connect to the database:", err);
+        })
+    );
+    describe("Validators", () => {
+        beforeEach(() => GameGenre.sync({ force: true }));
+        describe("Input data", () => {
+            it("should throw an error if name is null", (done) => {
+                GameGenre.create({})
+                    .then(() => done(new Error("It requires a valid name")))
+                    .catch(() => done());
+            });
+
+            it("should throw an error if id is null", () => {
+                GameGenre.create({ name: "Super Mario Bros" })
+                    .then(() => done(new Error("It requires a valid name")))
+                    .catch(() => done());
+            });
+
+            it("should work when its a valid name an valid id", () => {
+                return GameGenre.create({
+                    name: "Super Mario Bros",
+                    id: 1,
+                }).then((genre) => {
+                    expect(genre.name).to.equal("Super Mario Bros");
                 });
             });
         });

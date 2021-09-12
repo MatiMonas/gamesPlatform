@@ -7,8 +7,8 @@ const { Videogame, conn } = require("../../src/db.js");
 const agent = session(app);
 const videogame = {
     name: "Super Mario Bros",
-    description: "Super Mario Bros",
-    platforms: "ps4",
+    description: "description",
+    platforms: ["ps1"],
 };
 
 describe("Videogame routes", () => {
