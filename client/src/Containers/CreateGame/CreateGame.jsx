@@ -28,7 +28,7 @@ function CreateGame() {
     });
     let [checkedGenres, setCheckedGenres] = useState([]);
     let [checkedPlatforms, setCheckedPlatforms] = useState([]);
-    let [showResults, setShowResults] = useState(false);
+    let [showResults] = useState(false);
     const [stars, setStars] = useState([]);
     const [button, setButton] = useState(true);
     const genres = useSelector((state) => state.genres);
@@ -168,6 +168,7 @@ function CreateGame() {
                     <div className={style.formContainer}>
                         <form className={style.form} onSubmit={handleSubmit}>
                             <div className={style.imgContainer}>
+                                <p>Image Preview</p>
                                 <img
                                     className={`${style.img} || ${
                                         !videogame.background_image
@@ -189,6 +190,7 @@ function CreateGame() {
                                                     style={{ color: "black" }}
                                                     type="text"
                                                     name="name"
+                                                    autoComplete="off"
                                                     value={videogame.name}
                                                     onChange={handleChange}
                                                     required
@@ -244,6 +246,7 @@ function CreateGame() {
                                                 <input
                                                     style={{ color: "black" }}
                                                     type="text"
+                                                    autoComplete="off"
                                                     name="background_image"
                                                     value={
                                                         videogame.background_image
@@ -253,6 +256,9 @@ function CreateGame() {
                                                     className={style.inputs}
                                                 />
                                             </div>
+                                            <p className={style.error}>
+                                                {error.background_image_error}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className={style.rating}>

@@ -41,6 +41,12 @@
     height: 100%;
 }
 
+.error {
+    position: absolute;
+    color: red;
+    padding: 0.5em;
+}
+
 .formContainer {
     position: relative;
     width: 80%;
