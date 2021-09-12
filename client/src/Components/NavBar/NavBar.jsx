@@ -14,7 +14,7 @@ function NavBar() {
                         <SearchBar className={style.searchBar} />
 
                         <Link to="/create_videogame">
-                            <h2 className={style.h2}>Agregar videojuego</h2>
+                            <h2 className={style.h2}>Add Videogame</h2>
                         </Link>
                     </div>
                 </nav>

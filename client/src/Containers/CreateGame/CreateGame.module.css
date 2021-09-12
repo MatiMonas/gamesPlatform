@@ -3,13 +3,14 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+    padding: 0.5em 1.5em 0em 1.5em;
 }
 
 .h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(83, 83, 83, 0.295);
+    background: rgba(83, 83, 83, 0.48);
     width: 20%;
     height: 6%;
     border-radius: 10px 10px 0px 0px;
@@ -41,6 +42,10 @@
     height: 100%;
 }
 
+.rating {
+    padding-bottom: 0.5em;
+}
+
 .error {
     position: absolute;
     color: red;
@@ -54,7 +59,7 @@
     display: flex;
     /* flex-direction: column; */
     padding: 2em;
-    background: rgba(83, 83, 83, 0.295);
+    background: rgba(83, 83, 83, 0.479);
     border-radius: 10px;
     justify-content: center;
 }
@@ -117,6 +122,10 @@ textarea {
     padding: 1.5em;
 }
 
+.rating input[type="range"] {
+    width: 150px;
+}
+
 textarea:active,
 textarea:focus,
 .inputs:active,
@@ -129,7 +138,7 @@ textarea:focus,
 }
 
 .title {
-    padding: 0.5em 0em;
+    padding-bottom: 0.5em;
 }
 
 /* .radioGroup {
@@ -146,7 +155,7 @@ textarea:focus,
     position: relative;
 
     white-space: nowrap;
-    padding: 0.1em 15px;
+    padding: 0.1em 20px;
 }
 .radio input[type="checkbox"],
 .radio input[type="radio"] {
@@ -154,20 +163,20 @@ textarea:focus,
 }
 
 .radio span {
-    height: 12px;
-    width: 12px;
+    height: 15px;
+    width: 15px;
     /* border-radius: 50%; */
     border: 2px solid #fff;
     display: block;
     position: absolute;
     left: 0;
-    top: 5px;
+    top: 3px;
 }
 
 .radio span:after {
     content: "";
-    height: 13px;
-    width: 13px;
+    height: 11px;
+    width: 11px;
     display: block;
     background: rgb(255, 0, 64);
     position: absolute;

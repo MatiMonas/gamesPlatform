@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import style from "./CreateGame.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom";
-import { PLATFORMS_URL } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
 import starRating from "../../Utils/Functions/starRating";
@@ -184,7 +182,9 @@ function CreateGame() {
                                 <div className={style.inputContainer}>
                                     <div className={style.dateNameContainer}>
                                         <div className={style.nameContainer}>
-                                            <h2>Videogame Name*</h2>
+                                            <h2 className={style.title}>
+                                                Videogame Name*
+                                            </h2>
                                             <div>
                                                 <input
                                                     style={{ color: "black" }}
@@ -200,7 +200,9 @@ function CreateGame() {
                                         </div>
                                         <div className={style.dateContainer}>
                                             <div>
-                                                <h2>Release date*</h2>
+                                                <h2 className={style.title}>
+                                                    Release date*
+                                                </h2>
                                                 <div>
                                                     <input
                                                         style={{
@@ -225,7 +227,9 @@ function CreateGame() {
                                                 style.descriptionContainer
                                             }
                                         >
-                                            <h2>Description*</h2>
+                                            <h2 className={style.title}>
+                                                Description*
+                                            </h2>
                                             <div>
                                                 <textarea
                                                     style={{ color: "black" }}
@@ -241,7 +245,9 @@ function CreateGame() {
                                             </div>
                                         </div>
                                         <div className={style.imageContainer}>
-                                            <h2>URL Image*</h2>
+                                            <h2 className={style.title}>
+                                                URL Image*
+                                            </h2>
                                             <div>
                                                 <input
                                                     style={{ color: "black" }}
@@ -262,12 +268,15 @@ function CreateGame() {
                                         </div>
                                     </div>
                                     <div className={style.rating}>
-                                        <h2> Rating*</h2>
+                                        <h2 className={style.title}>
+                                            {" "}
+                                            Rating*
+                                        </h2>
                                         <div
                                             style={{
                                                 display: "flex",
                                                 alignContent: "center",
-                                                padding: "1em 0",
+                                                paddingBottom: "1em",
                                             }}
                                         >
                                             <input
@@ -280,8 +289,11 @@ function CreateGame() {
                                                 onChange={handleChange}
                                                 required
                                             />
-                                            {stars?.map((p) => (
-                                                <FontAwesomeIcon icon={p} />
+                                            {stars?.map((p, i) => (
+                                                <FontAwesomeIcon
+                                                    icon={p}
+                                                    key={i}
+                                                />
                                             ))}
                                         </div>
                                     </div>
@@ -335,7 +347,7 @@ function CreateGame() {
                                     >
                                         {result?.map((el) => (
                                             <label
-                                                key={el.id}
+                                                key={el}
                                                 className={style.radio}
                                             >
                                                 <input
