@@ -49,10 +49,10 @@ describe("Platform model", () => {
 
             it("should work when its a valid name an valid id", () => {
                 return Platform.create({
-                    name: "Super Mario Bros",
+                    name: "Ps4",
                     id: 1,
                 }).then((platform) => {
-                    expect(platform.name).to.equal("Super Mario Bros");
+                    expect(platform.name).to.equal("Ps4");
                 });
             });
         });
