@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require("chai");
 const session = require("supertest-session");
+var supertest = require("supertest-as-promised")(require("../../src/app"));
+var expect = require("chai").expect;
 const app = require("../../src/app.js");
 const { Videogame, conn } = require("../../src/db.js");
 
@@ -20,7 +21,20 @@ describe("Videogame routes", () => {
     beforeEach(() =>
         Videogame.sync({ force: true }).then(() => Videogame.create(videogame))
     );
-    describe("GET /videogames", () => {
+    describe("GET api/videogames", () => {
         it("should get 200", () => agent.get("/videogames").expect(200));
+    });
+});
+
+describe("api/videogame/:id", () => {
+    it("GET should return the details of certain game", () => {
+        Videogame.create(videogame);
+        return supertest
+            .get("api/videogame/videogame")
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect((res) => {
+                expect(res.body).to.have.length(3);
+            });
     });
 });

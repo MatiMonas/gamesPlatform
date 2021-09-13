@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
 import starRating from "../../Utils/Functions/starRating";
 import Logo from "../../Components/Logo";
-import { uuid } from "uuidv4";
+import { v4 as uuid_v4 } from "uuid";
 // import { Link } from "react-router-dom";
 
 function CreateGame() {
@@ -40,7 +40,7 @@ function CreateGame() {
     //Listens the change on the stars state to map that number
     useEffect(() => setStars(starRating(videogame.rating)), [videogame.rating]);
 
-    //If videogame state has some fakse values, submit button will be disabled
+    //If videogame state has some fake values, submit button will be disabled
     useEffect(() => {
         if (
             videogame.name &&
@@ -79,7 +79,7 @@ function CreateGame() {
     let result = [...otherPlatforms];
 
     /*----------------VALIDATION---------------*/
-    //eslint ignore next line
+
     function formValidation(state) {
         let validateUrl =
             /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
@@ -158,7 +158,7 @@ function CreateGame() {
     function handleSubmit(e) {
         e.preventDefault();
         const newGame = {
-            id: uuid(),
+            id: uuid_v4(),
             name: videogame.name,
             description: videogame.description,
             background_image: videogame.background_image,
@@ -265,7 +265,7 @@ function CreateGame() {
                                                     value={
                                                         videogame.description
                                                     }
-                                                    maxLength="500"
+                                                    maxLength="1000"
                                                     onChange={handleChange}
                                                     rows="5"
                                                     required
@@ -318,7 +318,6 @@ function CreateGame() {
                                                 step="0.5"
                                                 name="rating"
                                                 value={videogame.rating}
-                                                defaultValue="0"
                                                 onChange={handleChange}
                                                 required
                                             />

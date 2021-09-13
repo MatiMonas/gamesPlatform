@@ -3,8 +3,6 @@ const { expect } = require("chai");
 const app = require("../../src/app.js");
 const session = require("supertest-session");
 
-const agent = session(app);
-
 describe("Videogame model", () => {
     before(() =>
         conn.authenticate().catch((err) => {
