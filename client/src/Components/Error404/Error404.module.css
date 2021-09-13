@@ -25,10 +25,6 @@
     gap: 10%;
 }
 
-.textContainer {
-    /* background: yellow; */
-}
-
 .gifContainer {
     display: flex;
     margin: auto;
