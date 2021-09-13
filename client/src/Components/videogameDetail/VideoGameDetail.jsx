@@ -27,16 +27,16 @@ function VideogameDetail() {
                     <div className={style.bkImgContainer}>
                         <img
                             className={style.bkimg}
-                            src={videoGameDetail[0].background_image}
+                            src={videoGameDetail[0]?.background_image}
                             alt=""
                         />
                     </div>
                     <div className={style.infoContainer}>
                         <div className={style.textContainer}>
                             <div className={style.titleContainer}>
-                                <h1>{videoGameDetail[0].name}</h1>
+                                <h1>{videoGameDetail[0]?.name}</h1>
                                 <h4 style={{ display: "flex", gap: "5px" }}>
-                                    {videoGameDetail[0].rating}
+                                    {videoGameDetail[0]?.rating}
                                     <TiStar className={style.star} />
                                 </h4>
                             </div>
@@ -44,22 +44,22 @@ function VideogameDetail() {
                                 <h3>Description:</h3>
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: videoGameDetail[0].description,
+                                        __html: videoGameDetail[0]?.description,
                                     }}
                                 ></div>
                             </div>
                             <div>
                                 <h4>Release date</h4>
-                                <p>{videoGameDetail[0].releaseDate} </p>
+                                <p>{videoGameDetail[0]?.releaseDate} </p>
                             </div>
 
                             <div>
                                 <h4>Genres</h4>
                                 <p>
-                                    {videoGameDetail[0].genres
+                                    {videoGameDetail[0]?.genres
                                         ?.map((el) => el?.name)
                                         .join(", ") ||
-                                        videoGameDetail[0].gameGenres
+                                        videoGameDetail[0]?.gameGenres
                                             ?.map((el) => el?.name)
                                             .join(", ")}
                                     .
@@ -68,7 +68,7 @@ function VideogameDetail() {
                             <div>
                                 <h4>Platforms</h4>
                                 <p>
-                                    {videoGameDetail[0].platforms
+                                    {videoGameDetail[0]?.platforms
                                         ?.map((el) => el)
                                         .join(", ")}
                                     .
@@ -79,7 +79,7 @@ function VideogameDetail() {
                         <div className={style.imgContainer}>
                             <img
                                 className={style.img}
-                                src={videoGameDetail[0].background_image}
+                                src={videoGameDetail[0]?.background_image}
                                 alt=""
                             />
                         </div>

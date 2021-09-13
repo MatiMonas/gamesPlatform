@@ -6,24 +6,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGames, postGame } from "../../redux/actions";
 import starRating from "../../Utils/Functions/starRating";
 import Logo from "../../Components/Logo";
+import { uuid } from "uuidv4";
 // import { Link } from "react-router-dom";
 
 function CreateGame() {
     const { push } = useHistory();
     const dispatch = useDispatch();
+
     const [videogame, setVideogame] = useState({
         name: "",
         description: "",
         background_image: "",
         releaseDate: "",
         rating: 0,
-
-        platforms: [],
     });
 
     const [error, setError] = useState({
+        name_error: "",
         background_image_error: "",
+        description_error: "",
+        releaseDate_error: "",
     });
+
     let [checkedGenres, setCheckedGenres] = useState([]);
     let [checkedPlatforms, setCheckedPlatforms] = useState([]);
     let [showResults] = useState(false);
@@ -53,12 +57,13 @@ function CreateGame() {
         else setButton(true);
     }, [videogame, error, checkedGenres, checkedPlatforms]);
 
+    /*-------------------------------------------*/
+
     //Converting the array of number(ids) to an array of string
     let genresResult = Array.from(checkedGenres.toString()).filter(
         (el) => el !== ","
     );
 
-    //Doing a map from platforms, filtering the repeated values with a set and making it an array to iterate the values
     let otherPlatforms = [
         "Android",
         "Nintendo Switch",
@@ -73,20 +78,35 @@ function CreateGame() {
     ];
     let result = [...otherPlatforms];
 
-    /*----------------HANDLERS---------------*/
-
-    function validateImage(state) {
+    /*----------------VALIDATION---------------*/
+    //eslint ignore next line
+    function formValidation(state) {
         let validateUrl =
             /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
 
         let error = {};
 
         if (!validateUrl.test(state.background_image)) {
-            error.background_image_error = "Insert a valid URL";
+            error.background_image_error = "Insert a valid URL.";
         }
+
+        // if (!videogame.name.length) {
+        //     error.name_error = "Videogame name is required.";
+        // }
+        // if (!videogame.description) {
+        //     error.description_error = "Videogame description is required.";
+        // }
+        // if (!videogame.releaseDate) {
+        //     error.releaseDate_error = "Videogame release date is required.";
+        // }
+        // if (!videogame.rating) {
+        //     error.rating_error = "Videogame rating is required.";
+        // }
 
         return error;
     }
+
+    /*----------------HANDLERS---------------*/
 
     function handleChange(e) {
         setVideogame((prevState) => {
@@ -94,7 +114,7 @@ function CreateGame() {
                 ...prevState,
                 [e.target.name]: e.target.value,
             };
-            setError(validateImage(newState));
+            setError(formValidation(newState));
             return newState;
         });
         //Converting the first letter of videogameName to uppercase
@@ -138,6 +158,7 @@ function CreateGame() {
     function handleSubmit(e) {
         e.preventDefault();
         const newGame = {
+            id: uuid(),
             name: videogame.name,
             description: videogame.description,
             background_image: videogame.background_image,
@@ -146,12 +167,12 @@ function CreateGame() {
             genres: genresResult,
             platforms: checkedPlatforms,
         };
-        console.log(newGame.genres);
 
         //posting the game
         dispatch(postGame(newGame));
-        dispatch(getGames());
-        push(`/home`);
+        dispatch(getGames()).then();
+        alert("Game created with success");
+        setTimeout(() => push(`/details/${newGame.id}`), 1000);
     }
 
     return (
@@ -164,6 +185,7 @@ function CreateGame() {
                         <h1>Create videogame</h1>
                     </div>
                     <div className={style.formContainer}>
+                        <p className={style.required}>*required</p>
                         <form className={style.form} onSubmit={handleSubmit}>
                             <div className={style.imgContainer}>
                                 <p>Image Preview</p>
@@ -197,6 +219,9 @@ function CreateGame() {
                                                     className={style.inputs}
                                                 />
                                             </div>
+                                            {/* <p className={style.error}>
+                                                {error.name_error}
+                                            </p> */}
                                         </div>
                                         <div className={style.dateContainer}>
                                             <div>
@@ -219,6 +244,9 @@ function CreateGame() {
                                                     ></input>
                                                 </div>
                                             </div>
+                                            {/* <p className={style.error}>
+                                                {error.releaseDate_error}
+                                            </p> */}
                                         </div>
                                     </div>
                                     <div className={style.descrImageContainer}>
@@ -237,12 +265,16 @@ function CreateGame() {
                                                     value={
                                                         videogame.description
                                                     }
+                                                    maxLength="500"
                                                     onChange={handleChange}
                                                     rows="5"
                                                     required
                                                     className={style}
                                                 ></textarea>
                                             </div>
+                                            {/* <p className={style.error}>
+                                                {error.description_error}
+                                            </p> */}
                                         </div>
                                         <div className={style.imageContainer}>
                                             <h2 className={style.title}>
@@ -286,6 +318,7 @@ function CreateGame() {
                                                 step="0.5"
                                                 name="rating"
                                                 value={videogame.rating}
+                                                defaultValue="0"
                                                 onChange={handleChange}
                                                 required
                                             />
@@ -382,13 +415,3 @@ function CreateGame() {
 }
 
 export default CreateGame;
-
-// {
-//     /* <div className={style.buttonContainer}>
-//     <Link to="/home">
-//         <div className={style.boton2}>
-//             <span>Start</span>
-//         </div>
-//     </Link>
-// </div>;
-// }

@@ -6,6 +6,16 @@
     padding: 0.5em 1.5em 0em 1.5em;
 }
 
+.required {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: green;
+    padding: 1em;
+}
+
 .h1 {
     display: flex;
     justify-content: center;

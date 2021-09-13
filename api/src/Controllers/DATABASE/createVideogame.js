@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const createVideogame = async (req, res, next) => {
     const {
+        id,
         name,
         description,
         background_image,
@@ -14,8 +15,9 @@ const createVideogame = async (req, res, next) => {
 
     try {
         await GameGenre.findAll({ where: { name: genres } });
+
         await Videogame.create({
-            id: uuidv4(),
+            id,
             name,
             description, //en la base de datos cuando creo un juego le agrego la descripcion
             releaseDate,
