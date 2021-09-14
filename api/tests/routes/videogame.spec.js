@@ -18,23 +18,22 @@ describe("Videogame routes", () => {
             console.error("Unable to connect to the database:", err);
         })
     );
-    beforeEach(() =>
-        Videogame.sync({ force: true }).then(() => Videogame.create(videogame))
-    );
-    describe("GET api/videogames", () => {
-        it("should get 200", () => agent.get("/videogames").expect(200));
+    beforeEach(() => Videogame.sync().then(() => Videogame.create(videogame)));
+    describe("GET videogames", () => {
+        it("should get 200", async () =>
+            await agent.get("/api/videogames").expect(200));
     });
 });
 
-describe("api/videogame/:id", () => {
-    it("GET should return the details of certain game", () => {
-        Videogame.create(videogame);
-        return supertest
-            .get("api/videogame/videogame")
-            .expect(200)
-            .expect("Content-Type", /json/)
-            .expect((res) => {
-                expect(res.body).to.have.length(3);
-            });
-    });
-});
+// describe("api/videogame/:id", () => {
+//     it("GET should return the details of certain game", () => {
+//         Videogame.create(videogame);
+//         return supertest
+//             .get("api/videogame/videogame")
+//             .expect(200)
+//             .expect("Content-Type", /json/)
+//             .expect((res) => {
+//                 expect(res.body).to.have.length(3);
+//             });
+//     });
+// });

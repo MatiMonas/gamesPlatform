@@ -13,7 +13,7 @@ import MainView from "./Containers/MainView/MainView";
 function App() {
     const dispatch = useDispatch();
 
-    //cuando se monta el componente app
+    //cuando se monta el componente app traigo todos los juegos y generos
     useEffect(() => {
         dispatch(getGames());
         dispatch(getGenres());
