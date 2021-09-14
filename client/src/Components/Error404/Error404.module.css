@@ -22,14 +22,14 @@
     flex-direction: column;
     justify-content: space-between;
     /* background: green; */
-    gap: 10%;
+    gap: 5%;
 }
 
 .gifContainer {
     display: flex;
     margin: auto;
     position: relative;
-    width: 30%;
+    width: max-content;
     /* height: 20%; */
     /* background: pink; */
 }
