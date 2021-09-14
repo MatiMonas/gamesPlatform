@@ -22,7 +22,6 @@ let initialState = {
     searchByName: undefined,
     filtersByName: [],
     searchById: [],
-    isLoading: false,
 };
 export default function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
