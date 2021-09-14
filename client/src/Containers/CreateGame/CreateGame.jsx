@@ -170,7 +170,7 @@ function CreateGame() {
 
         //posting the game
         dispatch(postGame(newGame));
-        dispatch(getGames()).then();
+        dispatch(getGames());
         alert("Game created with success");
         setTimeout(() => push(`/details/${newGame.id}`), 1000);
     }
